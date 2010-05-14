@@ -806,12 +806,12 @@ ComponentLibIdentifierKind1=Library Name And Type
 ComponentLibraryIdentifier1=msp430_schlib.SchLib
 ComponentDesignItemID1=eZ430-RF2500
 ComponentSymbolReference1=eZ430-RF2500
-ComponentUpdate1=0
+ComponentUpdate1=1
 ComponentLibIdentifierKind2=Library Name And Type
 ComponentLibraryIdentifier2=msp430_schlib.SchLib
 ComponentDesignItemID2=LED
 ComponentSymbolReference2=LED
-ComponentUpdate2=1
+ComponentUpdate2=0
 ComponentLibIdentifierKind3=Library Name And Type
 ComponentLibraryIdentifier3=msp430_schlib.SchLib
 ComponentDesignItemID3=MMA7455L
@@ -827,7 +827,7 @@ ComponentLibraryIdentifier5=msp430_schlib.SchLib
 ComponentDesignItemID5=Resistor
 ComponentSymbolReference5=Resistor
 ComponentUpdate5=0
-FullReplace=0
+FullReplace=1
 UpdateDesignatorLock=1
 UpdatePartIDLock=1
 DoGraphics=0
@@ -875,31 +875,34 @@ ModelType3=PCBLIB
 ModelName3=eZ430-RF2500
 ModelUpdate3=1
 ModelType4=PCBLIB
-ModelName4=LED_0603
+ModelName4=Header_1x2
 ModelUpdate4=1
 ModelType5=PCBLIB
-ModelName5=LGA-14
+ModelName5=LED_0603
 ModelUpdate5=1
 ModelType6=PCBLIB
-ModelName6=Push Button
+ModelName6=LGA-14
 ModelUpdate6=1
 ModelType7=PCBLIB
-ModelName7=R_0402
+ModelName7=Push Button
 ModelUpdate7=1
 ModelType8=PCBLIB
-ModelName8=R_0603
+ModelName8=R_0402
 ModelUpdate8=1
 ModelType9=PCBLIB
-ModelName9=R_0805
+ModelName9=R_0603
 ModelUpdate9=1
+ModelType10=PCBLIB
+ModelName10=R_0805
+ModelUpdate10=1
 
 [DatabaseUpdateOptions]
 SelectedOnly=0
 PartTypes=0
 
 [ToDoManager]
-ProjectToDo1=Name=Somente as portas 1 e 2 do MSP430 podem gerar interrupção. Por isso,~1a net INT1 deve estar ligada ao pino 4 do conector (P2.1), enquanto a net~1INT2 deve estar associada ao pino 3 do conector (P2.0). Desse modo, o~1botão de uso geral deve ser deslocado para o pino 11 do conector (P4.6).|UID=YVBQWDTF
-ProjectToDo2=Name=Corrigir na simbologia o nome do pino 3 do conector, que deve ser~1P2.0/ACLK.|UID=HCBDWMIE
+ProjectToDo1=Name=Somente as portas 1 e 2 do MSP430 podem gerar interrupção. Por isso,~1a net INT1 deve estar ligada ao pino 4 do conector (P2.1), enquanto a net~1INT2 deve estar associada ao pino 3 do conector (P2.0). Desse modo, o~1botão de uso geral deve ser deslocado para o pino 11 do conector (P4.6).|State=1|UID=YVBQWDTF
+ProjectToDo2=Name=Corrigir na simbologia o nome do pino 3 do conector, que deve ser~1P2.0/ACLK.|State=1|UID=HCBDWMIE
 
 [Comparison Options]
 ComparisonOptions0=Kind=Net|MinPercent=75|MinMatch=3|ShowMatch=-1|Confirm=-1|UseName=-1|InclAllRules=0
