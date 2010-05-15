@@ -1,0 +1,1471 @@
+
+PROGRAM "D:\Pascal\Application\Application Note AN XXXX\AN3468SW\bin\Project.abs"
+
+*********************************************************************************************
+TARGET SECTION
+---------------------------------------------------------------------------------------------
+Processor   : Freescale HC08
+Memory Model: SMALL
+File Format : ELF\DWARF 2.0
+Linker      : SmartLinker V-5.0.30 Build 7285, Oct 13 2007
+
+*********************************************************************************************
+FILE SECTION
+---------------------------------------------------------------------------------------------
+main.c.o                                Model: SMALL,         Lang: ANSI-C
+RTSHC08.C.o (ansifs.lib)                Model: SMALL,         Lang: ANSI-C
+MC9S08GB60.C.o                          Model: SMALL,         Lang: ANSI-C
+Start08.c.o                             Model: SMALL,         Lang: ANSI-C
+sw_iic.c.o                              Model: SMALL,         Lang: ANSI-C
+sw_spi.c.o                              Model: SMALL,         Lang: ANSI-C
+doonstack.asm.o                         Model: SMALL,         Lang: Assembler
+mcu_init.c.o                            Model: SMALL,         Lang: ANSI-C
+sci.c.o                                 Model: SMALL,         Lang: ANSI-C
+
+*********************************************************************************************
+STARTUP SECTION
+---------------------------------------------------------------------------------------------
+Entry point: 0x18A7 (_Startup)
+_startupData is allocated at 0x18B0 and uses 6 Bytes
+extern struct _tagStartup {
+  unsigned nofZeroOut     2
+  _Range   pZeroOut       0x80     94
+                          0x100     4
+  _Copy    *toCopyDownBeg 0x25BD
+} _startupData;
+
+*********************************************************************************************
+SECTION-ALLOCATION SECTION
+Section Name                    Size  Type     From       To       Segment
+---------------------------------------------------------------------------------------------
+.data                              3   R/W      0x100      0x102   RAM
+.text                           3145     R     0x18BE     0x2506   ROM
+_DATA_ZEROPAGE                    94   R/W       0x80       0xDD   Z_RAM
+EEPROM                             6     R     0x1600     0x1605   EROM
+.abs_section_0                     1   N/I        0x0        0x0   .absSeg0
+.abs_section_1                     1   N/I        0x1        0x1   .absSeg1
+.abs_section_2                     1   N/I        0x2        0x2   .absSeg2
+.abs_section_3                     1   N/I        0x3        0x3   .absSeg3
+.abs_section_4                     1   N/I        0x4        0x4   .absSeg4
+.abs_section_5                     1   N/I        0x5        0x5   .absSeg5
+.abs_section_6                     1   N/I        0x6        0x6   .absSeg6
+.abs_section_7                     1   N/I        0x7        0x7   .absSeg7
+.abs_section_8                     1   N/I        0x8        0x8   .absSeg8
+.abs_section_9                     1   N/I        0x9        0x9   .absSeg9
+.abs_section_a                     1   N/I        0xA        0xA   .absSeg10
+.abs_section_b                     1   N/I        0xB        0xB   .absSeg11
+.abs_section_c                     1   N/I        0xC        0xC   .absSeg12
+.abs_section_d                     1   N/I        0xD        0xD   .absSeg13
+.abs_section_e                     1   N/I        0xE        0xE   .absSeg14
+.abs_section_f                     1   N/I        0xF        0xF   .absSeg15
+.abs_section_10                    1   N/I       0x10       0x10   .absSeg16
+.abs_section_11                    1   N/I       0x11       0x11   .absSeg17
+.abs_section_12                    1   N/I       0x12       0x12   .absSeg18
+.abs_section_13                    1   N/I       0x13       0x13   .absSeg19
+.abs_section_14                    1   N/I       0x14       0x14   .absSeg20
+.abs_section_16                    1   N/I       0x16       0x16   .absSeg21
+.abs_section_17                    1   N/I       0x17       0x17   .absSeg22
+.abs_section_1a                    1   N/I       0x1A       0x1A   .absSeg23
+.abs_section_1b                    1   N/I       0x1B       0x1B   .absSeg24
+.abs_section_1c                    1   N/I       0x1C       0x1C   .absSeg25
+.abs_section_1d                    1   N/I       0x1D       0x1D   .absSeg26
+.abs_section_1e                    1   N/I       0x1E       0x1E   .absSeg27
+.abs_section_1f                    1   N/I       0x1F       0x1F   .absSeg28
+.abs_section_22                    1   N/I       0x22       0x22   .absSeg29
+.abs_section_23                    1   N/I       0x23       0x23   .absSeg30
+.abs_section_24                    1   N/I       0x24       0x24   .absSeg31
+.abs_section_25                    1   N/I       0x25       0x25   .absSeg32
+.abs_section_26                    1   N/I       0x26       0x26   .absSeg33
+.abs_section_27                    1   N/I       0x27       0x27   .absSeg34
+.abs_section_28                    1   N/I       0x28       0x28   .absSeg35
+.abs_section_29                    1   N/I       0x29       0x29   .absSeg36
+.abs_section_2a                    1   N/I       0x2A       0x2A   .absSeg37
+.abs_section_2b                    1   N/I       0x2B       0x2B   .absSeg38
+.abs_section_2d                    1   N/I       0x2D       0x2D   .absSeg39
+.abs_section_30                    1   N/I       0x30       0x30   .absSeg40
+.abs_section_35                    1   N/I       0x35       0x35   .absSeg41
+.abs_section_38                    1   N/I       0x38       0x38   .absSeg42
+.abs_section_3b                    1   N/I       0x3B       0x3B   .absSeg43
+.abs_section_40                    1   N/I       0x40       0x40   .absSeg44
+.abs_section_41                    1   N/I       0x41       0x41   .absSeg45
+.abs_section_42                    1   N/I       0x42       0x42   .absSeg46
+.abs_section_43                    1   N/I       0x43       0x43   .absSeg47
+.abs_section_44                    1   N/I       0x44       0x44   .absSeg48
+.abs_section_45                    1   N/I       0x45       0x45   .absSeg49
+.abs_section_46                    1   N/I       0x46       0x46   .absSeg50
+.abs_section_47                    1   N/I       0x47       0x47   .absSeg51
+.abs_section_48                    1   N/I       0x48       0x48   .absSeg52
+.abs_section_49                    1   N/I       0x49       0x49   .absSeg53
+.abs_section_4a                    1   N/I       0x4A       0x4A   .absSeg54
+.abs_section_4b                    1   N/I       0x4B       0x4B   .absSeg55
+.abs_section_4e                    1   N/I       0x4E       0x4E   .absSeg56
+.abs_section_50                    1   N/I       0x50       0x50   .absSeg57
+.abs_section_51                    1   N/I       0x51       0x51   .absSeg58
+.abs_section_54                    1   N/I       0x54       0x54   .absSeg59
+.abs_section_58                    1   N/I       0x58       0x58   .absSeg60
+.abs_section_59                    1   N/I       0x59       0x59   .absSeg61
+.abs_section_5a                    1   N/I       0x5A       0x5A   .absSeg62
+.abs_section_5b                    1   N/I       0x5B       0x5B   .absSeg63
+.abs_section_5c                    1   N/I       0x5C       0x5C   .absSeg64
+.abs_section_60                    1   N/I       0x60       0x60   .absSeg65
+.abs_section_65                    1   N/I       0x65       0x65   .absSeg66
+.abs_section_68                    1   N/I       0x68       0x68   .absSeg67
+.abs_section_6b                    1   N/I       0x6B       0x6B   .absSeg68
+.abs_section_6e                    1   N/I       0x6E       0x6E   .absSeg69
+.abs_section_71                    1   N/I       0x71       0x71   .absSeg70
+.abs_section_1800                  1   N/I     0x1800     0x1800   .absSeg71
+.abs_section_1801                  1   N/I     0x1801     0x1801   .absSeg72
+.abs_section_1802                  1   N/I     0x1802     0x1802   .absSeg73
+.abs_section_1808                  1   N/I     0x1808     0x1808   .absSeg74
+.abs_section_1809                  1   N/I     0x1809     0x1809   .absSeg75
+.abs_section_180a                  1   N/I     0x180A     0x180A   .absSeg76
+.abs_section_1810                  1   N/I     0x1810     0x1810   .absSeg77
+.abs_section_1811                  1   N/I     0x1811     0x1811   .absSeg78
+.abs_section_1812                  1   N/I     0x1812     0x1812   .absSeg79
+.abs_section_1813                  1   N/I     0x1813     0x1813   .absSeg80
+.abs_section_1816                  1   N/I     0x1816     0x1816   .absSeg81
+.abs_section_1817                  1   N/I     0x1817     0x1817   .absSeg82
+.abs_section_1818                  1   N/I     0x1818     0x1818   .absSeg83
+.abs_section_1820                  1   N/I     0x1820     0x1820   .absSeg84
+.abs_section_1821                  1   N/I     0x1821     0x1821   .absSeg85
+.abs_section_1823                  1   N/I     0x1823     0x1823   .absSeg86
+.abs_section_1824                  1   N/I     0x1824     0x1824   .absSeg87
+.abs_section_1825                  1   N/I     0x1825     0x1825   .absSeg88
+.abs_section_1826                  1   N/I     0x1826     0x1826   .absSeg89
+.abs_section_18                    2   N/I       0x18       0x19   .absSeg90
+.abs_section_20                    2   N/I       0x20       0x21   .absSeg91
+.abs_section_31                    2   N/I       0x31       0x32   .absSeg92
+.abs_section_33                    2   N/I       0x33       0x34   .absSeg93
+.abs_section_36                    2   N/I       0x36       0x37   .absSeg94
+.abs_section_39                    2   N/I       0x39       0x3A   .absSeg95
+.abs_section_3c                    2   N/I       0x3C       0x3D   .absSeg96
+.abs_section_4c                    2   N/I       0x4C       0x4D   .absSeg97
+.abs_section_52                    2   N/I       0x52       0x53   .absSeg98
+.abs_section_61                    2   N/I       0x61       0x62   .absSeg99
+.abs_section_63                    2   N/I       0x63       0x64   .absSeg100
+.abs_section_66                    2   N/I       0x66       0x67   .absSeg101
+.abs_section_69                    2   N/I       0x69       0x6A   .absSeg102
+.abs_section_6c                    2   N/I       0x6C       0x6D   .absSeg103
+.abs_section_6f                    2   N/I       0x6F       0x70   .absSeg104
+.abs_section_72                    2   N/I       0x72       0x73   .absSeg105
+.abs_section_1806                  2   N/I     0x1806     0x1807   .absSeg106
+.abs_section_1814                  2   N/I     0x1814     0x1815   .absSeg107
+.bss                               1   R/W      0x103      0x103   RAM
+.startData                        14     R     0x18B0     0x18BD   ROM
+.init                            132     R     0x182C     0x18AF   ROM
+MyCode                           182     R     0x2507     0x25BC   ROM
+.stack                           128   R/W      0x104      0x183   RAM
+.copy                             25     R     0x25BD     0x25D5   ROM
+.vectSeg108_vect                   2     R     0xFFFE     0xFFFF   .vectSeg108
+
+Summary of section sizes per section type:
+READ_ONLY (R):         DB2 (dec:     3506)
+READ_WRITE (R/W):       E2 (dec:      226)
+NO_INIT (N/I):          7E (dec:      126)
+
+*********************************************************************************************
+VECTOR-ALLOCATION SECTION
+    Address     InitValue   InitFunction
+---------------------------------------------------------------------------------------------
+     0xFFFE        0x18A7   _Startup
+
+*********************************************************************************************
+OBJECT-ALLOCATION SECTION
+     Name               Module                 Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+MODULE:                 -- main.c.o --
+- PROCEDURES:
+     Check_Butt0                               18BE      23      35       1   .text       
+     Check_Butt1                               18E1      23      35       1   .text       
+     Check_Butt2                               1904      28      40       1   .text       
+     Check_Butt3                               192C      23      35       1   .text       
+     main                                      194F      D5     213       3   .text       
+     DisplaySCI_Ion                            1A24      3B      59       1   .text       
+     Delay_Xms                                 1A5F      25      37       7   .text       
+     Read_AccelerometerIon                     1A84     226     550      16   .text       
+     Init_SensorIon                            1CAA      30      48       1   .text       
+     SetUp_GselectIon                          1CDA      29      41       1   .text       
+     SetUp_ModeOfSensorIon                     1D03      36      54       1   .text       
+     Change_SensorInterface                    1D39      37      55       1   .text       
+     Ion_SwitchMode                            1D70      25      37       1   .text       
+     AutoCalibration_Ion                       1D95     25D     605      17   .text       
+     ReadAllIonRegisters                       1FF2      89     137       2   .text       
+     Set_SelfTest                              207B      13      19       1   .text       
+     Clear_SelfTest                            208E      13      19       1   .text       
+     ReadIonMCTL                               20A1       8       8       6   .text       
+     ReadIonCTL1                               20A9       8       8       2   .text       
+- VARIABLES:
+     mode                                        80       1       1       1   _DATA_ZEROPAGE
+     iic_active                                  81       1       1       5   _DATA_ZEROPAGE
+     p_Ion_InitInterface                         82       2       2       3   _DATA_ZEROPAGE
+     p_Ion_ReadByte                              84       2       2      22   _DATA_ZEROPAGE
+     p_Ion_WriteByte                             86       2       2      14   _DATA_ZEROPAGE
+     p_Ion_MultiReadBytes                        88       2       2       6   _DATA_ZEROPAGE
+     p_Ion_MultiWriteBytes                       8A       2       2       1   _DATA_ZEROPAGE
+     last_st.1                                   8C       1       1       2   _DATA_ZEROPAGE
+     last_st.2                                   8D       1       1       2   _DATA_ZEROPAGE
+     last_st.3                                   8E       1       1       2   _DATA_ZEROPAGE
+     last_st.4                                   8F       1       1       2   _DATA_ZEROPAGE
+     MODE                                        90       1       1       2   _DATA_ZEROPAGE
+     ReadRegXOUTL                                91       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOUTH                                92       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUTL                                93       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUTH                                94       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUTL                                95       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUTH                                96       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOUT8                                97       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUT8                                98       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUT8                                99       1       1       1   _DATA_ZEROPAGE
+     ReadRegSTATUS                               9A       1       1       1   _DATA_ZEROPAGE
+     ReadRegDETSRC                               9B       1       1       1   _DATA_ZEROPAGE
+     ReadRegTOUT                                 9C       1       1       1   _DATA_ZEROPAGE
+     ReadRegRESERVED1                            9D       1       1       1   _DATA_ZEROPAGE
+     ReadRegI2CAD                                9E       1       1       1   _DATA_ZEROPAGE
+     ReadRegUSRINF                               9F       1       1       1   _DATA_ZEROPAGE
+     ReadRegWHOAM                                A0       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOFFL                                A1       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOFFH                                A2       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOFFL                                A3       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOFFH                                A4       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOFFL                                A5       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOFFH                                A6       1       1       1   _DATA_ZEROPAGE
+     ReadRegINTRST                               A7       1       1       1   _DATA_ZEROPAGE
+     ReadRegMCTL                                 A8       1       1       2   _DATA_ZEROPAGE
+     ReadRegCTL1                                 A9       1       1       2   _DATA_ZEROPAGE
+     ReadRegCTL2                                 AA       1       1       1   _DATA_ZEROPAGE
+     ReadRegLDTH                                 AB       1       1       1   _DATA_ZEROPAGE
+     ReadRegPDTH                                 AC       1       1       1   _DATA_ZEROPAGE
+     ReadRegPW                                   AD       1       1       1   _DATA_ZEROPAGE
+     ReadRegLT                                   AE       1       1       1   _DATA_ZEROPAGE
+     ReadRegTW                                   AF       1       1       1   _DATA_ZEROPAGE
+     ReadRegRESERVED2                            B0       1       1       1   _DATA_ZEROPAGE
+     X_LOW                                       B1       1       1       3   _DATA_ZEROPAGE
+     Y_LOW                                       B2       1       1       3   _DATA_ZEROPAGE
+     Z_LOW                                       B3       1       1       3   _DATA_ZEROPAGE
+     X_HIGH                                      B4       1       1       3   _DATA_ZEROPAGE
+     Y_HIGH                                      B5       1       1       3   _DATA_ZEROPAGE
+     Z_HIGH                                      B6       1       1       3   _DATA_ZEROPAGE
+     i                                           B7       1       1       6   _DATA_ZEROPAGE
+     ion_reg                                     B8      20      32      34   _DATA_ZEROPAGE
+     calib                                       D8       6       6       4   _DATA_ZEROPAGE
+     calib_eeprom                              1600       6       6       5   EEPROM      
+MODULE:                 -- RTSHC08.C.o (ansifs.lib) --
+- PROCEDURES:
+     _IDIVMOD                                  20B1      69     105       1   .text       
+     _SPLITSIGN                                211A      1C      28       1   .text       
+     _IDIVS_STAR08                             2136      1B      27       1   .text       
+     _ICMP                                     2151      16      22       1   .text       
+     _CALL_STAR08                              2167      20      32      16   .text       
+- VARIABLES:
+MODULE:                 -- MC9S08GB60.C.o --
+- PROCEDURES:
+- VARIABLES:
+     _PTAD                                        0       1       1      27   .abs_section_0
+     _PTAPE                                       1       1       1       7   .abs_section_1
+     _PTASE                                       2       1       1       0   .abs_section_2
+     _PTADD                                       3       1       1       7   .abs_section_3
+     _PTBD                                        4       1       1      12   .abs_section_4
+     _PTBPE                                       5       1       1       0   .abs_section_5
+     _PTBSE                                       6       1       1       0   .abs_section_6
+     _PTBDD                                       7       1       1       3   .abs_section_7
+     _PTCD                                        8       1       1      31   .abs_section_8
+     _PTCPE                                       9       1       1       2   .abs_section_9
+     _PTCSE                                       A       1       1       0   .abs_section_a
+     _PTCDD                                       B       1       1      20   .abs_section_b
+     _PTDD                                        C       1       1       4   .abs_section_c
+     _PTDPE                                       D       1       1       0   .abs_section_d
+     _PTDSE                                       E       1       1       0   .abs_section_e
+     _PTDDD                                       F       1       1       2   .abs_section_f
+     _PTED                                       10       1       1       0   .abs_section_10
+     _PTEPE                                      11       1       1       0   .abs_section_11
+     _PTESE                                      12       1       1       0   .abs_section_12
+     _PTEDD                                      13       1       1       0   .abs_section_13
+     _IRQSC                                      14       1       1       0   .abs_section_14
+     _KBI1SC                                     16       1       1       0   .abs_section_16
+     _KBI1PE                                     17       1       1       0   .abs_section_17
+     _SCI1C1                                     1A       1       1       1   .abs_section_1a
+     _SCI1C2                                     1B       1       1       1   .abs_section_1b
+     _SCI1S1                                     1C       1       1       2   .abs_section_1c
+     _SCI1S2                                     1D       1       1       1   .abs_section_1d
+     _SCI1C3                                     1E       1       1       1   .abs_section_1e
+     _SCI1D                                      1F       1       1       1   .abs_section_1f
+     _SCI2C1                                     22       1       1       0   .abs_section_22
+     _SCI2C2                                     23       1       1       0   .abs_section_23
+     _SCI2S1                                     24       1       1       0   .abs_section_24
+     _SCI2S2                                     25       1       1       0   .abs_section_25
+     _SCI2C3                                     26       1       1       0   .abs_section_26
+     _SCI2D                                      27       1       1       0   .abs_section_27
+     _SPI1C1                                     28       1       1       0   .abs_section_28
+     _SPI1C2                                     29       1       1       0   .abs_section_29
+     _SPI1BR                                     2A       1       1       0   .abs_section_2a
+     _SPI1S                                      2B       1       1       0   .abs_section_2b
+     _SPI1D                                      2D       1       1       0   .abs_section_2d
+     _TPM1SC                                     30       1       1       0   .abs_section_30
+     _TPM1C0SC                                   35       1       1       0   .abs_section_35
+     _TPM1C1SC                                   38       1       1       0   .abs_section_38
+     _TPM1C2SC                                   3B       1       1       0   .abs_section_3b
+     _PTFD                                       40       1       1      24   .abs_section_40
+     _PTFPE                                      41       1       1       0   .abs_section_41
+     _PTFSE                                      42       1       1       0   .abs_section_42
+     _PTFDD                                      43       1       1       4   .abs_section_43
+     _PTGD                                       44       1       1       0   .abs_section_44
+     _PTGPE                                      45       1       1       0   .abs_section_45
+     _PTGSE                                      46       1       1       0   .abs_section_46
+     _PTGDD                                      47       1       1       0   .abs_section_47
+     _ICGC1                                      48       1       1       1   .abs_section_48
+     _ICGC2                                      49       1       1       1   .abs_section_49
+     _ICGS1                                      4A       1       1       1   .abs_section_4a
+     _ICGS2                                      4B       1       1       0   .abs_section_4b
+     _ICGTRM                                     4E       1       1       0   .abs_section_4e
+     _ATD1C                                      50       1       1       0   .abs_section_50
+     _ATD1SC                                     51       1       1       0   .abs_section_51
+     _ATD1PE                                     54       1       1       0   .abs_section_54
+     _IIC1A                                      58       1       1       0   .abs_section_58
+     _IIC1F                                      59       1       1       0   .abs_section_59
+     _IIC1C                                      5A       1       1       0   .abs_section_5a
+     _IIC1S                                      5B       1       1       0   .abs_section_5b
+     _IIC1D                                      5C       1       1       0   .abs_section_5c
+     _TPM2SC                                     60       1       1       0   .abs_section_60
+     _TPM2C0SC                                   65       1       1       0   .abs_section_65
+     _TPM2C1SC                                   68       1       1       0   .abs_section_68
+     _TPM2C2SC                                   6B       1       1       0   .abs_section_6b
+     _TPM2C3SC                                   6E       1       1       0   .abs_section_6e
+     _TPM2C4SC                                   71       1       1       0   .abs_section_71
+     _SRS                                      1800       1       1       0   .abs_section_1800
+     _SBDFR                                    1801       1       1       0   .abs_section_1801
+     _SOPT                                     1802       1       1       1   .abs_section_1802
+     _SRTISC                                   1808       1       1       1   .abs_section_1808
+     _SPMSC1                                   1809       1       1       1   .abs_section_1809
+     _SPMSC2                                   180A       1       1       1   .abs_section_180a
+     _DBGCAH                                   1810       1       1       0   .abs_section_1810
+     _DBGCAL                                   1811       1       1       0   .abs_section_1811
+     _DBGCBH                                   1812       1       1       0   .abs_section_1812
+     _DBGCBL                                   1813       1       1       0   .abs_section_1813
+     _DBGC                                     1816       1       1       0   .abs_section_1816
+     _DBGT                                     1817       1       1       0   .abs_section_1817
+     _DBGS                                     1818       1       1       0   .abs_section_1818
+     _FCDIV                                    1820       1       1       1   .abs_section_1820
+     _FOPT                                     1821       1       1       0   .abs_section_1821
+     _FCNFG                                    1823       1       1       0   .abs_section_1823
+     _FPROT                                    1824       1       1       0   .abs_section_1824
+     _FSTAT                                    1825       1       1       0   .abs_section_1825
+     _FCMD                                     1826       1       1       0   .abs_section_1826
+     _SCI1BD                                     18       2       2       2   .abs_section_18
+     _SCI2BD                                     20       2       2       0   .abs_section_20
+     _TPM1CNT                                    31       2       2       0   .abs_section_31
+     _TPM1MOD                                    33       2       2       0   .abs_section_33
+     _TPM1C0V                                    36       2       2       0   .abs_section_36
+     _TPM1C1V                                    39       2       2       0   .abs_section_39
+     _TPM1C2V                                    3C       2       2       0   .abs_section_3c
+     _ICGFLT                                     4C       2       2       0   .abs_section_4c
+     _ATD1R                                      52       2       2       0   .abs_section_52
+     _TPM2CNT                                    61       2       2       0   .abs_section_61
+     _TPM2MOD                                    63       2       2       0   .abs_section_63
+     _TPM2C0V                                    66       2       2       0   .abs_section_66
+     _TPM2C1V                                    69       2       2       0   .abs_section_69
+     _TPM2C2V                                    6C       2       2       0   .abs_section_6c
+     _TPM2C3V                                    6F       2       2       0   .abs_section_6f
+     _TPM2C4V                                    72       2       2       0   .abs_section_72
+     _SDID                                     1806       2       2       0   .abs_section_1806
+     _DBGF                                     1814       2       2       0   .abs_section_1814
+MODULE:                 -- Start08.c.o --
+- PROCEDURES:
+     loadByte                                  182C       E      14       5   .init       
+     Init                                      183A      6D     109       1   .init       
+     _Startup                                  18A7       9       9       0   .init       
+- VARIABLES:
+     _startupData                              18B0       6       6       4   .startData  
+- LABELS:
+     __SEG_END_SSTACK                           184       0       0       1               
+MODULE:                 -- sw_iic.c.o --
+- PROCEDURES:
+     delay                                     2187      1B      27       5   .text       
+     Wait                                      21A2       6       6      16   .text       
+     SwIIC_Init                                21A8       D      13       2   .text       
+     IIC_DATA_0                                21B5      19      25       5   .text       
+     IIC_DATA_1                                21CE      17      23       5   .text       
+     IIC_GetBit                                21E5      20      32       5   .text       
+     IIC_START                                 2205      10      16       5   .text       
+     IIC_REPEAT_START                          2215      12      18       2   .text       
+     IIC_STOP                                  2227      1A      26       4   .text       
+     SwIIC_SendAddressWrite                    2241      28      40       4   .text       
+     SwIIC_SendAddressRead                     2269      28      40       2   .text       
+     SwIIC_SendRegister                        2291      20      32       4   .text       
+     IIC_ReadByte                              22B1      23      35       3   .text       
+     IIC_SendByte                              22D4      20      32       2   .text       
+     SwIIC_ReadByte                            22F4      2C      44       2   .text       
+     SwIIC_WriteByte                           2320      26      38       2   .text       
+     SwIIC_MultiReadBytes                      2346      65     101       2   .text       
+     SwIIC_MultiWriteBytes                     23AB      3B      59       2   .text       
+- VARIABLES:
+     ak1                                        100       1       1       1   .data       
+     ak2                                        101       1       1       1   .data       
+     ak3                                        102       1       1       2   .data       
+MODULE:                 -- sw_spi.c.o --
+- PROCEDURES:
+     SwSPI_Init                                23E6      13      19       1   .text       
+     SwSPI_SendChar                            23F9      35      53       8   .text       
+     SwSPI_ReceiveChar                         242E       4       4       2   .text       
+     SwSPI_ReadByte                            2432      14      20       1   .text       
+     SwSPI_WriteByte                           2446      17      23       1   .text       
+     SwSPI_MultiReadBytes                      245D      3D      61       1   .text       
+     SwSPI_MultiWriteBytes                     249A      31      49       1   .text       
+- VARIABLES:
+     rx_byte                                    103       1       1       3   .bss        
+MODULE:                 -- doonstack.asm.o --
+- PROCEDURES:
+     DoOnStack                                 2507       6       6       0   MyCode      
+     SpMoveLoop                                250D      18      24       0   MyCode      
+     I_set                                     2525       5       5       0   MyCode      
+     I_cont                                    252A       4       4       0   MyCode      
+     SpSub                                     252E      11      17       1   MyCode      
+     ChkDone                                   253F       6       6       0   MyCode      
+     SpSubEnd                                  2545       1       1       1   MyCode      
+     FlashErase1                               2546       D      13       1   MyCode      
+     FlashProg1                                2553       D      13       0   MyCode      
+     SpSubBurst                                2560      2E      46       1   MyCode      
+     FlashWriteOk                              258E       4       4       0   MyCode      
+     ChkDoneBurst                              2592       7       7       0   MyCode      
+     SpSubEndBurst                             2599       1       1       1   MyCode      
+     FlashProgBurst                            259A       B      11       1   MyCode      
+     SpMoveLoopBurst                           25A5      14      20       0   MyCode      
+     I_setBurst                                25B9       1       1       0   MyCode      
+     I_contBurst                               25BA       3       3       0   MyCode      
+- VARIABLES:
+MODULE:                 -- mcu_init.c.o --
+- PROCEDURES:
+     mcu_init                                  24CB      22      34       1   .text       
+- VARIABLES:
+MODULE:                 -- sci.c.o --
+- PROCEDURES:
+     initSCI                                   24ED       E      14       1   .text       
+     Tx_byte_SCI                               24FB       C      12      12   .text       
+- VARIABLES:
+
+*********************************************************************************************
+MODULE STATISTIC
+  Name                                      Data   Code  Const
+---------------------------------------------------------------------------------------------
+  main.c.o                                    94   2035      6
+  RTSHC08.C.o (ansifs.lib)                     0    214      0
+  MC9S08GB60.C.o                             126      0      0
+  Start08.c.o                                  0    132      0
+  sw_iic.c.o                                   3    607      0
+  sw_spi.c.o                                   1    229      0
+  doonstack.asm.o                              0    182      0
+  mcu_init.c.o                                 0     34      0
+  sci.c.o                                      0     26      0
+  other                                      128     16     25
+
+*********************************************************************************************
+SECTION USE IN OBJECT-ALLOCATION SECTION
+---------------------------------------------------------------------------------------------
+SECTION: ".text"
+  Check_Butt0 Check_Butt1 Check_Butt2 Check_Butt3 main DisplaySCI_Ion 
+  Delay_Xms Read_AccelerometerIon Init_SensorIon SetUp_GselectIon 
+  SetUp_ModeOfSensorIon Change_SensorInterface Ion_SwitchMode 
+  AutoCalibration_Ion ReadAllIonRegisters Set_SelfTest Clear_SelfTest 
+  ReadIonMCTL ReadIonCTL1 _IDIVMOD _SPLITSIGN _IDIVS_STAR08 _ICMP _CALL_STAR08 
+  delay Wait SwIIC_Init IIC_DATA_0 IIC_DATA_1 IIC_GetBit IIC_START 
+  IIC_REPEAT_START IIC_STOP SwIIC_SendAddressWrite SwIIC_SendAddressRead 
+  SwIIC_SendRegister IIC_ReadByte IIC_SendByte SwIIC_ReadByte SwIIC_WriteByte 
+  SwIIC_MultiReadBytes SwIIC_MultiWriteBytes SwSPI_Init SwSPI_SendChar 
+  SwSPI_ReceiveChar SwSPI_ReadByte SwSPI_WriteByte SwSPI_MultiReadBytes 
+  SwSPI_MultiWriteBytes mcu_init initSCI Tx_byte_SCI 
+SECTION: ".data"
+  ak1 ak2 ak3 
+SECTION: ".bss"
+  rx_byte 
+SECTION: ".init"
+  loadByte Init _Startup 
+SECTION: "_DATA_ZEROPAGE"
+  mode iic_active p_Ion_InitInterface p_Ion_ReadByte p_Ion_WriteByte 
+  p_Ion_MultiReadBytes p_Ion_MultiWriteBytes last_st.1 last_st.2 last_st.3 
+  last_st.4 MODE ReadRegXOUTL ReadRegXOUTH ReadRegYOUTL ReadRegYOUTH 
+  ReadRegZOUTL ReadRegZOUTH ReadRegXOUT8 ReadRegYOUT8 ReadRegZOUT8 
+  ReadRegSTATUS ReadRegDETSRC ReadRegTOUT ReadRegRESERVED1 ReadRegI2CAD 
+  ReadRegUSRINF ReadRegWHOAM ReadRegXOFFL ReadRegXOFFH ReadRegYOFFL 
+  ReadRegYOFFH ReadRegZOFFL ReadRegZOFFH ReadRegINTRST ReadRegMCTL ReadRegCTL1 
+  ReadRegCTL2 ReadRegLDTH ReadRegPDTH ReadRegPW ReadRegLT ReadRegTW 
+  ReadRegRESERVED2 X_LOW Y_LOW Z_LOW X_HIGH Y_HIGH Z_HIGH i ion_reg calib 
+SECTION: "EEPROM"
+  calib_eeprom 
+SECTION: ".abs_section_0"
+  _PTAD 
+SECTION: ".abs_section_1"
+  _PTAPE 
+SECTION: ".abs_section_2"
+  _PTASE 
+SECTION: ".abs_section_3"
+  _PTADD 
+SECTION: ".abs_section_4"
+  _PTBD 
+SECTION: ".abs_section_5"
+  _PTBPE 
+SECTION: ".abs_section_6"
+  _PTBSE 
+SECTION: ".abs_section_7"
+  _PTBDD 
+SECTION: ".abs_section_8"
+  _PTCD 
+SECTION: ".abs_section_9"
+  _PTCPE 
+SECTION: ".abs_section_a"
+  _PTCSE 
+SECTION: ".abs_section_b"
+  _PTCDD 
+SECTION: ".abs_section_c"
+  _PTDD 
+SECTION: ".abs_section_d"
+  _PTDPE 
+SECTION: ".abs_section_e"
+  _PTDSE 
+SECTION: ".abs_section_f"
+  _PTDDD 
+SECTION: ".abs_section_10"
+  _PTED 
+SECTION: ".abs_section_11"
+  _PTEPE 
+SECTION: ".abs_section_12"
+  _PTESE 
+SECTION: ".abs_section_13"
+  _PTEDD 
+SECTION: ".abs_section_14"
+  _IRQSC 
+SECTION: ".abs_section_16"
+  _KBI1SC 
+SECTION: ".abs_section_17"
+  _KBI1PE 
+SECTION: ".abs_section_1a"
+  _SCI1C1 
+SECTION: ".abs_section_1b"
+  _SCI1C2 
+SECTION: ".abs_section_1c"
+  _SCI1S1 
+SECTION: ".abs_section_1d"
+  _SCI1S2 
+SECTION: ".abs_section_1e"
+  _SCI1C3 
+SECTION: ".abs_section_1f"
+  _SCI1D 
+SECTION: ".abs_section_22"
+  _SCI2C1 
+SECTION: ".abs_section_23"
+  _SCI2C2 
+SECTION: ".abs_section_24"
+  _SCI2S1 
+SECTION: ".abs_section_25"
+  _SCI2S2 
+SECTION: ".abs_section_26"
+  _SCI2C3 
+SECTION: ".abs_section_27"
+  _SCI2D 
+SECTION: ".abs_section_28"
+  _SPI1C1 
+SECTION: ".abs_section_29"
+  _SPI1C2 
+SECTION: ".abs_section_2a"
+  _SPI1BR 
+SECTION: ".abs_section_2b"
+  _SPI1S 
+SECTION: ".abs_section_2d"
+  _SPI1D 
+SECTION: ".abs_section_30"
+  _TPM1SC 
+SECTION: ".abs_section_35"
+  _TPM1C0SC 
+SECTION: ".abs_section_38"
+  _TPM1C1SC 
+SECTION: ".abs_section_3b"
+  _TPM1C2SC 
+SECTION: ".abs_section_40"
+  _PTFD 
+SECTION: ".abs_section_41"
+  _PTFPE 
+SECTION: ".abs_section_42"
+  _PTFSE 
+SECTION: ".abs_section_43"
+  _PTFDD 
+SECTION: ".abs_section_44"
+  _PTGD 
+SECTION: ".abs_section_45"
+  _PTGPE 
+SECTION: ".abs_section_46"
+  _PTGSE 
+SECTION: ".abs_section_47"
+  _PTGDD 
+SECTION: ".abs_section_48"
+  _ICGC1 
+SECTION: ".abs_section_49"
+  _ICGC2 
+SECTION: ".abs_section_4a"
+  _ICGS1 
+SECTION: ".abs_section_4b"
+  _ICGS2 
+SECTION: ".abs_section_4e"
+  _ICGTRM 
+SECTION: ".abs_section_50"
+  _ATD1C 
+SECTION: ".abs_section_51"
+  _ATD1SC 
+SECTION: ".abs_section_54"
+  _ATD1PE 
+SECTION: ".abs_section_58"
+  _IIC1A 
+SECTION: ".abs_section_59"
+  _IIC1F 
+SECTION: ".abs_section_5a"
+  _IIC1C 
+SECTION: ".abs_section_5b"
+  _IIC1S 
+SECTION: ".abs_section_5c"
+  _IIC1D 
+SECTION: ".abs_section_60"
+  _TPM2SC 
+SECTION: ".abs_section_65"
+  _TPM2C0SC 
+SECTION: ".abs_section_68"
+  _TPM2C1SC 
+SECTION: ".abs_section_6b"
+  _TPM2C2SC 
+SECTION: ".abs_section_6e"
+  _TPM2C3SC 
+SECTION: ".abs_section_71"
+  _TPM2C4SC 
+SECTION: ".abs_section_1800"
+  _SRS 
+SECTION: ".abs_section_1801"
+  _SBDFR 
+SECTION: ".abs_section_1802"
+  _SOPT 
+SECTION: ".abs_section_1808"
+  _SRTISC 
+SECTION: ".abs_section_1809"
+  _SPMSC1 
+SECTION: ".abs_section_180a"
+  _SPMSC2 
+SECTION: ".abs_section_1810"
+  _DBGCAH 
+SECTION: ".abs_section_1811"
+  _DBGCAL 
+SECTION: ".abs_section_1812"
+  _DBGCBH 
+SECTION: ".abs_section_1813"
+  _DBGCBL 
+SECTION: ".abs_section_1816"
+  _DBGC 
+SECTION: ".abs_section_1817"
+  _DBGT 
+SECTION: ".abs_section_1818"
+  _DBGS 
+SECTION: ".abs_section_1820"
+  _FCDIV 
+SECTION: ".abs_section_1821"
+  _FOPT 
+SECTION: ".abs_section_1823"
+  _FCNFG 
+SECTION: ".abs_section_1824"
+  _FPROT 
+SECTION: ".abs_section_1825"
+  _FSTAT 
+SECTION: ".abs_section_1826"
+  _FCMD 
+SECTION: ".abs_section_18"
+  _SCI1BD 
+SECTION: ".abs_section_20"
+  _SCI2BD 
+SECTION: ".abs_section_31"
+  _TPM1CNT 
+SECTION: ".abs_section_33"
+  _TPM1MOD 
+SECTION: ".abs_section_36"
+  _TPM1C0V 
+SECTION: ".abs_section_39"
+  _TPM1C1V 
+SECTION: ".abs_section_3c"
+  _TPM1C2V 
+SECTION: ".abs_section_4c"
+  _ICGFLT 
+SECTION: ".abs_section_52"
+  _ATD1R 
+SECTION: ".abs_section_61"
+  _TPM2CNT 
+SECTION: ".abs_section_63"
+  _TPM2MOD 
+SECTION: ".abs_section_66"
+  _TPM2C0V 
+SECTION: ".abs_section_69"
+  _TPM2C1V 
+SECTION: ".abs_section_6c"
+  _TPM2C2V 
+SECTION: ".abs_section_6f"
+  _TPM2C3V 
+SECTION: ".abs_section_72"
+  _TPM2C4V 
+SECTION: ".abs_section_1806"
+  _SDID 
+SECTION: ".abs_section_1814"
+  _DBGF 
+SECTION: "MyCode"
+  DoOnStack SpMoveLoop I_set I_cont SpSub ChkDone SpSubEnd FlashErase1 
+  FlashProg1 SpSubBurst FlashWriteOk ChkDoneBurst SpSubEndBurst FlashProgBurst 
+  SpMoveLoopBurst I_setBurst I_contBurst 
+
+*********************************************************************************************
+OBJECT LIST SORTED BY ADDRESS
+     Name                                      Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+     _PTAD                                        0       1       1      27   .abs_section_0
+     _PTAPE                                       1       1       1       7   .abs_section_1
+     _PTASE                                       2       1       1       0   .abs_section_2
+     _PTADD                                       3       1       1       7   .abs_section_3
+     _PTBD                                        4       1       1      12   .abs_section_4
+     _PTBPE                                       5       1       1       0   .abs_section_5
+     _PTBSE                                       6       1       1       0   .abs_section_6
+     _PTBDD                                       7       1       1       3   .abs_section_7
+     _PTCD                                        8       1       1      31   .abs_section_8
+     _PTCPE                                       9       1       1       2   .abs_section_9
+     _PTCSE                                       A       1       1       0   .abs_section_a
+     _PTCDD                                       B       1       1      20   .abs_section_b
+     _PTDD                                        C       1       1       4   .abs_section_c
+     _PTDPE                                       D       1       1       0   .abs_section_d
+     _PTDSE                                       E       1       1       0   .abs_section_e
+     _PTDDD                                       F       1       1       2   .abs_section_f
+     _PTED                                       10       1       1       0   .abs_section_10
+     _PTEPE                                      11       1       1       0   .abs_section_11
+     _PTESE                                      12       1       1       0   .abs_section_12
+     _PTEDD                                      13       1       1       0   .abs_section_13
+     _IRQSC                                      14       1       1       0   .abs_section_14
+     _KBI1SC                                     16       1       1       0   .abs_section_16
+     _KBI1PE                                     17       1       1       0   .abs_section_17
+     _SCI1BD                                     18       2       2       2   .abs_section_18
+     _SCI1C1                                     1A       1       1       1   .abs_section_1a
+     _SCI1C2                                     1B       1       1       1   .abs_section_1b
+     _SCI1S1                                     1C       1       1       2   .abs_section_1c
+     _SCI1S2                                     1D       1       1       1   .abs_section_1d
+     _SCI1C3                                     1E       1       1       1   .abs_section_1e
+     _SCI1D                                      1F       1       1       1   .abs_section_1f
+     _SCI2BD                                     20       2       2       0   .abs_section_20
+     _SCI2C1                                     22       1       1       0   .abs_section_22
+     _SCI2C2                                     23       1       1       0   .abs_section_23
+     _SCI2S1                                     24       1       1       0   .abs_section_24
+     _SCI2S2                                     25       1       1       0   .abs_section_25
+     _SCI2C3                                     26       1       1       0   .abs_section_26
+     _SCI2D                                      27       1       1       0   .abs_section_27
+     _SPI1C1                                     28       1       1       0   .abs_section_28
+     _SPI1C2                                     29       1       1       0   .abs_section_29
+     _SPI1BR                                     2A       1       1       0   .abs_section_2a
+     _SPI1S                                      2B       1       1       0   .abs_section_2b
+     _SPI1D                                      2D       1       1       0   .abs_section_2d
+     _TPM1SC                                     30       1       1       0   .abs_section_30
+     _TPM1CNT                                    31       2       2       0   .abs_section_31
+     _TPM1MOD                                    33       2       2       0   .abs_section_33
+     _TPM1C0SC                                   35       1       1       0   .abs_section_35
+     _TPM1C0V                                    36       2       2       0   .abs_section_36
+     _TPM1C1SC                                   38       1       1       0   .abs_section_38
+     _TPM1C1V                                    39       2       2       0   .abs_section_39
+     _TPM1C2SC                                   3B       1       1       0   .abs_section_3b
+     _TPM1C2V                                    3C       2       2       0   .abs_section_3c
+     _PTFD                                       40       1       1      24   .abs_section_40
+     _PTFPE                                      41       1       1       0   .abs_section_41
+     _PTFSE                                      42       1       1       0   .abs_section_42
+     _PTFDD                                      43       1       1       4   .abs_section_43
+     _PTGD                                       44       1       1       0   .abs_section_44
+     _PTGPE                                      45       1       1       0   .abs_section_45
+     _PTGSE                                      46       1       1       0   .abs_section_46
+     _PTGDD                                      47       1       1       0   .abs_section_47
+     _ICGC1                                      48       1       1       1   .abs_section_48
+     _ICGC2                                      49       1       1       1   .abs_section_49
+     _ICGS1                                      4A       1       1       1   .abs_section_4a
+     _ICGS2                                      4B       1       1       0   .abs_section_4b
+     _ICGFLT                                     4C       2       2       0   .abs_section_4c
+     _ICGTRM                                     4E       1       1       0   .abs_section_4e
+     _ATD1C                                      50       1       1       0   .abs_section_50
+     _ATD1SC                                     51       1       1       0   .abs_section_51
+     _ATD1R                                      52       2       2       0   .abs_section_52
+     _ATD1PE                                     54       1       1       0   .abs_section_54
+     _IIC1A                                      58       1       1       0   .abs_section_58
+     _IIC1F                                      59       1       1       0   .abs_section_59
+     _IIC1C                                      5A       1       1       0   .abs_section_5a
+     _IIC1S                                      5B       1       1       0   .abs_section_5b
+     _IIC1D                                      5C       1       1       0   .abs_section_5c
+     _TPM2SC                                     60       1       1       0   .abs_section_60
+     _TPM2CNT                                    61       2       2       0   .abs_section_61
+     _TPM2MOD                                    63       2       2       0   .abs_section_63
+     _TPM2C0SC                                   65       1       1       0   .abs_section_65
+     _TPM2C0V                                    66       2       2       0   .abs_section_66
+     _TPM2C1SC                                   68       1       1       0   .abs_section_68
+     _TPM2C1V                                    69       2       2       0   .abs_section_69
+     _TPM2C2SC                                   6B       1       1       0   .abs_section_6b
+     _TPM2C2V                                    6C       2       2       0   .abs_section_6c
+     _TPM2C3SC                                   6E       1       1       0   .abs_section_6e
+     _TPM2C3V                                    6F       2       2       0   .abs_section_6f
+     _TPM2C4SC                                   71       1       1       0   .abs_section_71
+     _TPM2C4V                                    72       2       2       0   .abs_section_72
+     mode                                        80       1       1       1   _DATA_ZEROPAGE
+     iic_active                                  81       1       1       5   _DATA_ZEROPAGE
+     p_Ion_InitInterface                         82       2       2       3   _DATA_ZEROPAGE
+     p_Ion_ReadByte                              84       2       2      22   _DATA_ZEROPAGE
+     p_Ion_WriteByte                             86       2       2      14   _DATA_ZEROPAGE
+     p_Ion_MultiReadBytes                        88       2       2       6   _DATA_ZEROPAGE
+     p_Ion_MultiWriteBytes                       8A       2       2       1   _DATA_ZEROPAGE
+     last_st.1                                   8C       1       1       2   _DATA_ZEROPAGE
+     last_st.2                                   8D       1       1       2   _DATA_ZEROPAGE
+     last_st.3                                   8E       1       1       2   _DATA_ZEROPAGE
+     last_st.4                                   8F       1       1       2   _DATA_ZEROPAGE
+     MODE                                        90       1       1       2   _DATA_ZEROPAGE
+     ReadRegXOUTL                                91       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOUTH                                92       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUTL                                93       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUTH                                94       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUTL                                95       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUTH                                96       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOUT8                                97       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOUT8                                98       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOUT8                                99       1       1       1   _DATA_ZEROPAGE
+     ReadRegSTATUS                               9A       1       1       1   _DATA_ZEROPAGE
+     ReadRegDETSRC                               9B       1       1       1   _DATA_ZEROPAGE
+     ReadRegTOUT                                 9C       1       1       1   _DATA_ZEROPAGE
+     ReadRegRESERVED1                            9D       1       1       1   _DATA_ZEROPAGE
+     ReadRegI2CAD                                9E       1       1       1   _DATA_ZEROPAGE
+     ReadRegUSRINF                               9F       1       1       1   _DATA_ZEROPAGE
+     ReadRegWHOAM                                A0       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOFFL                                A1       1       1       1   _DATA_ZEROPAGE
+     ReadRegXOFFH                                A2       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOFFL                                A3       1       1       1   _DATA_ZEROPAGE
+     ReadRegYOFFH                                A4       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOFFL                                A5       1       1       1   _DATA_ZEROPAGE
+     ReadRegZOFFH                                A6       1       1       1   _DATA_ZEROPAGE
+     ReadRegINTRST                               A7       1       1       1   _DATA_ZEROPAGE
+     ReadRegMCTL                                 A8       1       1       2   _DATA_ZEROPAGE
+     ReadRegCTL1                                 A9       1       1       2   _DATA_ZEROPAGE
+     ReadRegCTL2                                 AA       1       1       1   _DATA_ZEROPAGE
+     ReadRegLDTH                                 AB       1       1       1   _DATA_ZEROPAGE
+     ReadRegPDTH                                 AC       1       1       1   _DATA_ZEROPAGE
+     ReadRegPW                                   AD       1       1       1   _DATA_ZEROPAGE
+     ReadRegLT                                   AE       1       1       1   _DATA_ZEROPAGE
+     ReadRegTW                                   AF       1       1       1   _DATA_ZEROPAGE
+     ReadRegRESERVED2                            B0       1       1       1   _DATA_ZEROPAGE
+     X_LOW                                       B1       1       1       3   _DATA_ZEROPAGE
+     Y_LOW                                       B2       1       1       3   _DATA_ZEROPAGE
+     Z_LOW                                       B3       1       1       3   _DATA_ZEROPAGE
+     X_HIGH                                      B4       1       1       3   _DATA_ZEROPAGE
+     Y_HIGH                                      B5       1       1       3   _DATA_ZEROPAGE
+     Z_HIGH                                      B6       1       1       3   _DATA_ZEROPAGE
+     i                                           B7       1       1       6   _DATA_ZEROPAGE
+     ion_reg                                     B8      20      32      34   _DATA_ZEROPAGE
+     calib                                       D8       6       6       4   _DATA_ZEROPAGE
+     ak1                                        100       1       1       1   .data       
+     ak2                                        101       1       1       1   .data       
+     ak3                                        102       1       1       2   .data       
+     rx_byte                                    103       1       1       3   .bss        
+     calib_eeprom                              1600       6       6       5   EEPROM      
+     _SRS                                      1800       1       1       0   .abs_section_1800
+     _SBDFR                                    1801       1       1       0   .abs_section_1801
+     _SOPT                                     1802       1       1       1   .abs_section_1802
+     _SDID                                     1806       2       2       0   .abs_section_1806
+     _SRTISC                                   1808       1       1       1   .abs_section_1808
+     _SPMSC1                                   1809       1       1       1   .abs_section_1809
+     _SPMSC2                                   180A       1       1       1   .abs_section_180a
+     _DBGCAH                                   1810       1       1       0   .abs_section_1810
+     _DBGCAL                                   1811       1       1       0   .abs_section_1811
+     _DBGCBH                                   1812       1       1       0   .abs_section_1812
+     _DBGCBL                                   1813       1       1       0   .abs_section_1813
+     _DBGF                                     1814       2       2       0   .abs_section_1814
+     _DBGC                                     1816       1       1       0   .abs_section_1816
+     _DBGT                                     1817       1       1       0   .abs_section_1817
+     _DBGS                                     1818       1       1       0   .abs_section_1818
+     _FCDIV                                    1820       1       1       1   .abs_section_1820
+     _FOPT                                     1821       1       1       0   .abs_section_1821
+     _FCNFG                                    1823       1       1       0   .abs_section_1823
+     _FPROT                                    1824       1       1       0   .abs_section_1824
+     _FSTAT                                    1825       1       1       0   .abs_section_1825
+     _FCMD                                     1826       1       1       0   .abs_section_1826
+     loadByte                                  182C       E      14       5   .init       
+     Init                                      183A      6D     109       1   .init       
+     _Startup                                  18A7       9       9       0   .init       
+     Check_Butt0                               18BE      23      35       1   .text       
+     Check_Butt1                               18E1      23      35       1   .text       
+     Check_Butt2                               1904      28      40       1   .text       
+     Check_Butt3                               192C      23      35       1   .text       
+     main                                      194F      D5     213       3   .text       
+     DisplaySCI_Ion                            1A24      3B      59       1   .text       
+     Delay_Xms                                 1A5F      25      37       7   .text       
+     Read_AccelerometerIon                     1A84     226     550      16   .text       
+     Init_SensorIon                            1CAA      30      48       1   .text       
+     SetUp_GselectIon                          1CDA      29      41       1   .text       
+     SetUp_ModeOfSensorIon                     1D03      36      54       1   .text       
+     Change_SensorInterface                    1D39      37      55       1   .text       
+     Ion_SwitchMode                            1D70      25      37       1   .text       
+     AutoCalibration_Ion                       1D95     25D     605      17   .text       
+     ReadAllIonRegisters                       1FF2      89     137       2   .text       
+     Set_SelfTest                              207B      13      19       1   .text       
+     Clear_SelfTest                            208E      13      19       1   .text       
+     ReadIonMCTL                               20A1       8       8       6   .text       
+     ReadIonCTL1                               20A9       8       8       2   .text       
+     _IDIVMOD                                  20B1      69     105       1   .text       
+     _SPLITSIGN                                211A      1C      28       1   .text       
+     _IDIVS_STAR08                             2136      1B      27       1   .text       
+     _ICMP                                     2151      16      22       1   .text       
+     _CALL_STAR08                              2167      20      32      16   .text       
+     delay                                     2187      1B      27       5   .text       
+     Wait                                      21A2       6       6      16   .text       
+     SwIIC_Init                                21A8       D      13       2   .text       
+     IIC_DATA_0                                21B5      19      25       5   .text       
+     IIC_DATA_1                                21CE      17      23       5   .text       
+     IIC_GetBit                                21E5      20      32       5   .text       
+     IIC_START                                 2205      10      16       5   .text       
+     IIC_REPEAT_START                          2215      12      18       2   .text       
+     IIC_STOP                                  2227      1A      26       4   .text       
+     SwIIC_SendAddressWrite                    2241      28      40       4   .text       
+     SwIIC_SendAddressRead                     2269      28      40       2   .text       
+     SwIIC_SendRegister                        2291      20      32       4   .text       
+     IIC_ReadByte                              22B1      23      35       3   .text       
+     IIC_SendByte                              22D4      20      32       2   .text       
+     SwIIC_ReadByte                            22F4      2C      44       2   .text       
+     SwIIC_WriteByte                           2320      26      38       2   .text       
+     SwIIC_MultiReadBytes                      2346      65     101       2   .text       
+     SwIIC_MultiWriteBytes                     23AB      3B      59       2   .text       
+     SwSPI_Init                                23E6      13      19       1   .text       
+     SwSPI_SendChar                            23F9      35      53       8   .text       
+     SwSPI_ReceiveChar                         242E       4       4       2   .text       
+     SwSPI_ReadByte                            2432      14      20       1   .text       
+     SwSPI_WriteByte                           2446      17      23       1   .text       
+     SwSPI_MultiReadBytes                      245D      3D      61       1   .text       
+     SwSPI_MultiWriteBytes                     249A      31      49       1   .text       
+     mcu_init                                  24CB      22      34       1   .text       
+     initSCI                                   24ED       E      14       1   .text       
+     Tx_byte_SCI                               24FB       C      12      12   .text       
+     DoOnStack                                 2507       6       6       0   MyCode      
+     SpMoveLoop                                250D      18      24       0   MyCode      
+     I_set                                     2525       5       5       0   MyCode      
+     I_cont                                    252A       4       4       0   MyCode      
+     SpSub                                     252E      11      17       1   MyCode      
+     ChkDone                                   253F       6       6       0   MyCode      
+     SpSubEnd                                  2545       1       1       1   MyCode      
+     FlashErase1                               2546       D      13       1   MyCode      
+     FlashProg1                                2553       D      13       0   MyCode      
+     SpSubBurst                                2560      2E      46       1   MyCode      
+     FlashWriteOk                              258E       4       4       0   MyCode      
+     ChkDoneBurst                              2592       7       7       0   MyCode      
+     SpSubEndBurst                             2599       1       1       1   MyCode      
+     FlashProgBurst                            259A       B      11       1   MyCode      
+     SpMoveLoopBurst                           25A5      14      20       0   MyCode      
+     I_setBurst                                25B9       1       1       0   MyCode      
+     I_contBurst                               25BA       3       3       0   MyCode      
+
+*********************************************************************************************
+UNUSED-OBJECTS SECTION
+---------------------------------------------------------------------------------------------
+NOT USED PROCEDURES
+main.c.o:
+  Dummy_Pointer Ion_ClearIntLatchINT1 Ion_ClearIntLatchINT2 Ion_ClearIntLatch 
+  AutoCalibration_Ion_Alt8g_10bits ReadIonXOUTL ReadIonXOUTH ReadIonYOUTL 
+  ReadIonYOUTH ReadIonZOUTL ReadIonZOUTH ReadIonXOUT8 ReadIonYOUT8 ReadIonZOUT8 
+  ReadIonSTATUS ReadIonDETSR ReadIonTOUT ReadIonI2CAD ReadIonUSRIN ReadIonWHOAM 
+  ReadIonXOFFL ReadIonXOFFH ReadIonYOFFL ReadIonYOFFH ReadIonZOFFL ReadIonZOFFH 
+  ReadIonINTRS ReadIonCTL2 ReadIonLDTH ReadIonPDTH ReadIonPW ReadIonLT 
+  ReadIonTW 
+RTSHC08.C.o (ansifs.lib):
+  _PUSH_ARGS_L _PUSH_ARGS_D _ENTER_UNARY_L _ENTER_UNARY_L64 _ENTER_UNARY_L64_4 
+  _ENTER_BINARY_L _ENTER_BINARY_L_RC _ENTER_BINARY_L_LC _ENTER_BINARY_L64 
+  _ENTER_BINARY_L64_LC _ENTER_BINARY_L64_RC _LADD_k_is_k_plus_j 
+  _k_is_k_plus_j_l _k_is_k_plus_j_i _LSUB_k_is_k_minus_j _LAND_k_is_k_and_j 
+  _LOR_k_is_k_or_j _LXOR_k_is_k_xor_j _LMUL_k_is_k_mul_j _LDIVMOD _NEG_L_HX 
+  _ABS_L_HX _SPLITSIGN_L _LMODU_k_is_k_mod_j _LDIVU_k_is_k_div_j 
+  _LMODS_k_is_k_mod_j _LDIVS_k_is_k_div_j _LCMP_k_rel_j _CMP24_k_rel_j _BMULS 
+  _BDIVS _BMODS _IMUL_STAR08 _IDIVU_STAR08 _IMODS_STAR08 _IMODU_STAR08 _IDIVU_8 
+  _IMODU_8 _IASR _ILSR _ILSL _LINC _LDEC _LNEG _LNOT _LADD _LADD_RC _LSUB 
+  _LSUB_LC _LSUB_RC _LAND _LAND_RC _LOR _LOR_RC _LXOR _LXOR_RC _LMUL _LMUL_RC 
+  _LDIVS _LDIVS_LC _LDIVS_RC _LDIVU _LDIVU_LC _LDIVU_RC _LMODS _LMODS_LC 
+  _LMODS_RC _LMODU _LMODU_LC _LMODU_RC _LASR _LLSR _LLSL _LCMP _LCMP_RC _CMP24 
+  _CMP24_RC _COPY _COPY_L _POP32 _POP64 _STORE32 _STORE64 _SEXT8_32 _SEXT16_32 
+  _CALL_STAR08_FAR _Jump_Table_Addr _Jump_Table_Offset _Jump_Table_Header_Addr 
+  _Jump_Table_Header_Offset _Search_Table_16_Addr _Search_Table_16_Offset 
+  _Search_Table_8_Addr _Search_Table_8_Offset _PUSH_CC _POP_CC 
+  _CONV_FAR_TO_NEAR _CONV_FAR_TO_LINEAR _CONV_LINEAR_TO_FAR F_CLRK F_CLRK_Unary 
+  F_NANK F_INFK F_INFK_Unary F_TLK F_XGKL _UNPACK_k_to_K _UNPACK_k_to_K_Unary 
+  _UNPACK_j_to_L _PACK_K_to_k _PACK_K_to_k_Unary F_NORMK _FADD_K_is_K_plus_L 
+  _FMUL_K_is_K_times_L _FDIV_K_is_L_div_K _F_LONGK _F_FLOATK _FCMP_k_rel_j 
+  _FADD_Common _FSUB_Common _FMUL_Common _FDIV_Common _FADD _FADD_RC _FSUB 
+  _FSUB_RC _FSUB_LC _FMUL _FMUL_RC _FDIV _FDIV_RC _FDIV_LC _FSTRUNC _FUTRUNC 
+  _FNEG _FABS _FCMP _FCMP_RC _FINC _FDEC _FSFLOAT _FUFLOAT D_TLK D_TLRes 
+  D_TKRes D_XGKL D_CLRK D_CLRK_Unary D_NANK D_NANK_Unary D_INFK D_INFK_Unary 
+  _DUNPACK_k_to_K _DUNPACK_k_to_K_Unary _DUNPACK_j_to_L _DPACK_K_to_k 
+  _DPACK_K_to_k_Unary D_NORMK_Unary D_NORMK _DADD_K_is_K_plus_L 
+  _DMUL_K_is_K_times_L _DDIV_K_is_L_div_K _DCMP_k_rel_j _D_FLOATK _D_LONGK 
+  _D_FTODK _D_DTOFK _DADD_Common _DSUB_Common _DMUL_Common _DDIV_Common _DADD 
+  _DADD_RC _DSUB _DSUB_RC _DSUB_LC _DMUL _DMUL_RC _DDIV _DDIV_LC _DDIV_RC _DCMP 
+  _DCMP_RC _DINC _DDEC _DNEG _DABS _DSFLOAT _DUFLOAT _DSTRUNC _DUTRUNC _DSHORT 
+  _DLONG 
+NOT USED VARIABLES
+main.c.o:
+  tmpcalib tmpaccel tmpbuff p x z 
+RTSHC08.C.o (ansifs.lib):
+  _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 plus1 minus1 plus1d minus1d errno 
+
+*********************************************************************************************
+COPYDOWN SECTION
+---------------------------------------------------------------------------------------------
+------- ROM-ADDRESS: 0x25BD ---- SIZE       4 ---
+Filling bytes inserted
+ 000C0080
+------- ROM-ADDRESS: 0x25C1 ---- RAM-ADDRESS: 0x80 ---- SIZE       1 ---
+Name of initialized Object : mode
+ 01
+------- ROM-ADDRESS: 0x25C2 ---- RAM-ADDRESS: 0x81 ---- SIZE       1 ---
+Name of initialized Object : iic_active
+ 01
+------- ROM-ADDRESS: 0x25C3 ---- RAM-ADDRESS: 0x82 ---- SIZE       2 ---
+Name of initialized Object : p_Ion_InitInterface
+ 21A8
+------- ROM-ADDRESS: 0x25C5 ---- RAM-ADDRESS: 0x84 ---- SIZE       2 ---
+Name of initialized Object : p_Ion_ReadByte
+ 22F4
+------- ROM-ADDRESS: 0x25C7 ---- RAM-ADDRESS: 0x86 ---- SIZE       2 ---
+Name of initialized Object : p_Ion_WriteByte
+ 2320
+------- ROM-ADDRESS: 0x25C9 ---- RAM-ADDRESS: 0x88 ---- SIZE       2 ---
+Name of initialized Object : p_Ion_MultiReadBytes
+ 2346
+------- ROM-ADDRESS: 0x25CB ---- RAM-ADDRESS: 0x8A ---- SIZE       2 ---
+Name of initialized Object : p_Ion_MultiWriteBytes
+ 23AB
+------- ROM-ADDRESS: 0x25CD ---- SIZE       4 ---
+Filling bytes inserted
+ 00030100
+------- ROM-ADDRESS: 0x25D1 ---- RAM-ADDRESS: 0x100 ---- SIZE       1 ---
+Name of initialized Object : ak1
+ 01
+------- ROM-ADDRESS: 0x25D2 ---- RAM-ADDRESS: 0x101 ---- SIZE       1 ---
+Name of initialized Object : ak2
+ 01
+------- ROM-ADDRESS: 0x25D3 ---- RAM-ADDRESS: 0x102 ---- SIZE       1 ---
+Name of initialized Object : ak3
+ 01
+------- ROM-ADDRESS: 0x25D4 ---- SIZE       2 ---
+Filling bytes inserted
+ 0000
+
+*********************************************************************************************
+OBJECT-DEPENDENCIES SECTION
+---------------------------------------------------------------------------------------------
+p_Ion_InitInterface       USES SwIIC_Init 
+p_Ion_ReadByte            USES SwIIC_ReadByte 
+p_Ion_WriteByte           USES SwIIC_WriteByte 
+p_Ion_MultiReadBytes      USES SwIIC_MultiReadBytes 
+p_Ion_MultiWriteBytes     USES SwIIC_MultiWriteBytes 
+Init                      USES _startupData loadByte 
+_Startup                  USES __SEG_END_SSTACK Init main 
+Check_Butt0               USES _PTAD last_st.1 _PTFD Delay_Xms 
+                                AutoCalibration_Ion 
+Check_Butt1               USES _PTAD last_st.2 _PTFD Delay_Xms Set_SelfTest 
+Check_Butt2               USES _PTAD last_st.3 _PTFD Delay_Xms Clear_SelfTest 
+                                SetUp_ModeOfSensorIon 
+Check_Butt3               USES _PTAD last_st.4 _PTFD Delay_Xms 
+                                ReadAllIonRegisters 
+main                      USES mcu_init initSCI _PTFD _PTFDD _PTADD _PTAPE 
+                                main _PTBD _PTBDD _PTDD _PTDDD 
+                                Change_SensorInterface Init_SensorIon _FCDIV i calib_eeprom 
+                                p_Ion_WriteByte _CALL_STAR08 calib MODE Delay_Xms 
+                                ReadAllIonRegisters Check_Butt0 Check_Butt1 Check_Butt2 
+                                Check_Butt3 Read_AccelerometerIon DisplaySCI_Ion 
+DisplaySCI_Ion            USES Tx_byte_SCI X_HIGH X_LOW Y_HIGH Y_LOW Z_HIGH 
+                                Z_LOW 
+Read_AccelerometerIon     USES _PTAD MODE Read_AccelerometerIon iic_active 
+                                p_Ion_MultiReadBytes _CALL_STAR08 p_Ion_ReadByte X_LOW X_HIGH Y_LOW 
+                                Y_HIGH Z_LOW Z_HIGH 
+Init_SensorIon            USES p_Ion_InitInterface _PTAD _PTADD _PTAPE 
+                                Delay_Xms p_Ion_WriteByte _CALL_STAR08 ReadIonMCTL 
+                                ReadIonCTL1 
+SetUp_GselectIon          USES p_Ion_ReadByte p_Ion_WriteByte _CALL_STAR08 
+                                ReadIonMCTL 
+SetUp_ModeOfSensorIon     USES Ion_SwitchMode p_Ion_ReadByte p_Ion_WriteByte 
+                                _CALL_STAR08 ReadIonMCTL ReadIonCTL1 mode 
+Change_SensorInterface    USES iic_active SwIIC_Init p_Ion_InitInterface 
+                                SwIIC_ReadByte p_Ion_ReadByte SwIIC_WriteByte p_Ion_WriteByte 
+                                SwIIC_MultiReadBytes p_Ion_MultiReadBytes SwIIC_MultiWriteBytes 
+                                SwSPI_Init SwSPI_ReadByte SwSPI_WriteByte 
+                                SwSPI_MultiReadBytes SwSPI_MultiWriteBytes p_Ion_MultiWriteBytes 
+Ion_SwitchMode            USES p_Ion_ReadByte p_Ion_WriteByte _CALL_STAR08 
+                                ReadIonMCTL 
+AutoCalibration_Ion       USES AutoCalibration_Ion SetUp_GselectIon _PTAD 
+                                iic_active p_Ion_MultiReadBytes _CALL_STAR08 
+                                p_Ion_ReadByte _IDIVS_STAR08 p_Ion_WriteByte calib 
+                                calib_eeprom FlashErase1 FlashProgBurst 
+ReadAllIonRegisters       USES iic_active ion_reg p_Ion_MultiReadBytes 
+                                _CALL_STAR08 p_Ion_ReadByte ReadRegXOUTL ReadRegXOUTH 
+                                ReadRegYOUTL ReadRegYOUTH ReadRegZOUTL ReadRegZOUTH 
+                                ReadRegXOUT8 ReadRegYOUT8 ReadRegZOUT8 ReadRegSTATUS 
+                                ReadRegDETSRC ReadRegTOUT ReadRegRESERVED1 ReadRegI2CAD 
+                                ReadRegUSRINF ReadRegWHOAM ReadRegXOFFL ReadRegXOFFH 
+                                ReadRegYOFFL ReadRegYOFFH ReadRegZOFFL ReadRegZOFFH 
+                                ReadRegINTRST ReadRegMCTL ReadRegCTL1 ReadRegCTL2 
+                                ReadRegLDTH ReadRegPDTH ReadRegPW ReadRegLT ReadRegTW 
+                                ReadRegRESERVED2 
+Set_SelfTest              USES p_Ion_ReadByte p_Ion_WriteByte _CALL_STAR08 
+                                ReadIonMCTL 
+Clear_SelfTest            USES p_Ion_ReadByte p_Ion_WriteByte _CALL_STAR08 
+                                ReadIonMCTL 
+ReadIonMCTL               USES p_Ion_ReadByte ReadRegMCTL 
+ReadIonCTL1               USES p_Ion_ReadByte ReadRegCTL1 
+_SPLITSIGN                USES _IDIVMOD 
+_IDIVS_STAR08             USES _SPLITSIGN 
+SwIIC_Init                USES _PTCDD _PTBDD _PTCPE _PTBD 
+IIC_DATA_0                USES _PTCD _PTCDD Wait 
+IIC_DATA_1                USES _PTCDD Wait _PTCD 
+IIC_GetBit                USES _PTCDD Wait _PTCD 
+IIC_START                 USES _PTCD _PTCDD Wait 
+IIC_REPEAT_START          USES _PTCDD Wait _PTCD IIC_START 
+IIC_STOP                  USES _PTCD _PTCDD Wait 
+SwIIC_SendAddressWrite    USES IIC_DATA_1 IIC_DATA_0 IIC_GetBit ak1 
+SwIIC_SendAddressRead     USES IIC_DATA_1 IIC_DATA_0 IIC_GetBit ak3 
+SwIIC_SendRegister        USES IIC_DATA_1 IIC_DATA_0 IIC_GetBit ak2 
+IIC_ReadByte              USES IIC_GetBit IIC_DATA_0 IIC_DATA_1 
+IIC_SendByte              USES IIC_DATA_1 IIC_DATA_0 IIC_GetBit ak3 
+SwIIC_ReadByte            USES IIC_START SwIIC_SendAddressWrite 
+                                SwIIC_SendRegister IIC_REPEAT_START SwIIC_SendAddressRead 
+                                IIC_ReadByte IIC_STOP delay 
+SwIIC_WriteByte           USES IIC_START SwIIC_SendAddressWrite 
+                                SwIIC_SendRegister IIC_SendByte IIC_STOP delay 
+SwIIC_MultiReadBytes      USES IIC_START SwIIC_SendAddressWrite 
+                                SwIIC_SendRegister IIC_REPEAT_START SwIIC_SendAddressRead 
+                                IIC_ReadByte _ICMP IIC_STOP delay 
+SwIIC_MultiWriteBytes     USES IIC_START delay SwIIC_SendAddressWrite 
+                                SwIIC_SendRegister IIC_SendByte IIC_STOP 
+SwSPI_Init                USES _PTCD _PTAD _PTBD _PTCDD _PTADD _PTBDD _PTAPE 
+SwSPI_SendChar            USES rx_byte _PTCD _PTAD 
+SwSPI_ReceiveChar         USES rx_byte 
+SwSPI_ReadByte            USES _PTCD _PTBD SwSPI_SendChar SwSPI_ReceiveChar 
+SwSPI_WriteByte           USES _PTCD _PTBD SwSPI_SendChar 
+SwSPI_MultiReadBytes      USES _PTCD _PTBD SwSPI_SendChar SwSPI_ReceiveChar 
+SwSPI_MultiWriteBytes     USES _PTCD _PTBD SwSPI_SendChar 
+mcu_init                  USES _ICGC1 _ICGC2 _ICGS1 _SOPT _SRTISC _SPMSC2 
+                                _SPMSC1 
+initSCI                   USES _SCI1BD _SCI1C1 _SCI1C2 _SCI1C3 _SCI1S2 
+Tx_byte_SCI               USES _SCI1S1 _SCI1D 
+DoOnStack                 USES SpSubEnd 
+SpMoveLoop                USES SpSub 
+FlashProgBurst            USES SpSubEndBurst 
+SpMoveLoopBurst           USES SpSubBurst 
+
+*********************************************************************************************
+DEPENDENCY TREE
+*********************************************************************************************
+ main and _Startup Group
+ | 
+ +- main                
+ |  | 
+ |  +- mcu_init            
+ |  |    
+ |  +- initSCI             
+ |  |    
+ |  +- Change_SensorInterface
+ |  |  | 
+ |  |  +- SwIIC_Init          
+ |  |  |    
+ |  |  +- p_Ion_InitInterface 
+ |  |  |  | 
+ |  |  |  +- SwIIC_Init           (see above)
+ |  |  |     
+ |  |  +- SwIIC_ReadByte      
+ |  |  |  | 
+ |  |  |  +- IIC_START           
+ |  |  |  |  | 
+ |  |  |  |  +- Wait                
+ |  |  |  |       
+ |  |  |  +- SwIIC_SendAddressWrite
+ |  |  |  |  | 
+ |  |  |  |  +- IIC_DATA_1          
+ |  |  |  |  |  | 
+ |  |  |  |  |  +- Wait                 (see above)
+ |  |  |  |  |     
+ |  |  |  |  +- IIC_DATA_0          
+ |  |  |  |  |  | 
+ |  |  |  |  |  +- Wait                 (see above)
+ |  |  |  |  |     
+ |  |  |  |  +- IIC_GetBit          
+ |  |  |  |     | 
+ |  |  |  |     +- Wait                 (see above)
+ |  |  |  |        
+ |  |  |  +- SwIIC_SendRegister  
+ |  |  |  |  | 
+ |  |  |  |  +- IIC_DATA_1           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_DATA_0           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_GetBit           (see above)
+ |  |  |  |     
+ |  |  |  +- IIC_REPEAT_START    
+ |  |  |  |  | 
+ |  |  |  |  +- Wait                 (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_START            (see above)
+ |  |  |  |     
+ |  |  |  +- SwIIC_SendAddressRead
+ |  |  |  |  | 
+ |  |  |  |  +- IIC_DATA_1           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_DATA_0           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_GetBit           (see above)
+ |  |  |  |     
+ |  |  |  +- IIC_ReadByte        
+ |  |  |  |  | 
+ |  |  |  |  +- IIC_GetBit           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_DATA_0           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_DATA_1           (see above)
+ |  |  |  |     
+ |  |  |  +- IIC_STOP            
+ |  |  |  |  | 
+ |  |  |  |  +- Wait                 (see above)
+ |  |  |  |     
+ |  |  |  +- delay               
+ |  |  |       
+ |  |  +- p_Ion_ReadByte      
+ |  |  |  | 
+ |  |  |  +- SwIIC_ReadByte       (see above)
+ |  |  |     
+ |  |  +- SwIIC_WriteByte     
+ |  |  |  | 
+ |  |  |  +- IIC_START            (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendAddressWrite (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendRegister   (see above)
+ |  |  |  |  
+ |  |  |  +- IIC_SendByte        
+ |  |  |  |  | 
+ |  |  |  |  +- IIC_DATA_1           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_DATA_0           (see above)
+ |  |  |  |  |  
+ |  |  |  |  +- IIC_GetBit           (see above)
+ |  |  |  |     
+ |  |  |  +- IIC_STOP             (see above)
+ |  |  |  |  
+ |  |  |  +- delay                (see above)
+ |  |  |     
+ |  |  +- p_Ion_WriteByte     
+ |  |  |  | 
+ |  |  |  +- SwIIC_WriteByte      (see above)
+ |  |  |     
+ |  |  +- SwIIC_MultiReadBytes
+ |  |  |  | 
+ |  |  |  +- IIC_START            (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendAddressWrite (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendRegister   (see above)
+ |  |  |  |  
+ |  |  |  +- IIC_REPEAT_START     (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendAddressRead (see above)
+ |  |  |  |  
+ |  |  |  +- IIC_ReadByte         (see above)
+ |  |  |  |  
+ |  |  |  +- _ICMP               
+ |  |  |  |    
+ |  |  |  +- IIC_STOP             (see above)
+ |  |  |  |  
+ |  |  |  +- delay                (see above)
+ |  |  |     
+ |  |  +- p_Ion_MultiReadBytes
+ |  |  |  | 
+ |  |  |  +- SwIIC_MultiReadBytes (see above)
+ |  |  |     
+ |  |  +- SwIIC_MultiWriteBytes
+ |  |  |  | 
+ |  |  |  +- IIC_START            (see above)
+ |  |  |  |  
+ |  |  |  +- delay                (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendAddressWrite (see above)
+ |  |  |  |  
+ |  |  |  +- SwIIC_SendRegister   (see above)
+ |  |  |  |  
+ |  |  |  +- IIC_SendByte         (see above)
+ |  |  |  |  
+ |  |  |  +- IIC_STOP             (see above)
+ |  |  |     
+ |  |  +- SwSPI_Init          
+ |  |  |    
+ |  |  +- SwSPI_ReadByte      
+ |  |  |  | 
+ |  |  |  +- SwSPI_SendChar      
+ |  |  |  |    
+ |  |  |  +- SwSPI_ReceiveChar   
+ |  |  |       
+ |  |  +- SwSPI_WriteByte     
+ |  |  |  | 
+ |  |  |  +- SwSPI_SendChar       (see above)
+ |  |  |     
+ |  |  +- SwSPI_MultiReadBytes
+ |  |  |  | 
+ |  |  |  +- SwSPI_SendChar       (see above)
+ |  |  |  |  
+ |  |  |  +- SwSPI_ReceiveChar    (see above)
+ |  |  |     
+ |  |  +- SwSPI_MultiWriteBytes
+ |  |  |  | 
+ |  |  |  +- SwSPI_SendChar       (see above)
+ |  |  |     
+ |  |  +- p_Ion_MultiWriteBytes
+ |  |     | 
+ |  |     +- SwIIC_MultiWriteBytes (see above)
+ |  |        
+ |  +- Init_SensorIon      
+ |  |  | 
+ |  |  +- p_Ion_InitInterface  (see above)
+ |  |  |  
+ |  |  +- Delay_Xms           
+ |  |  |    
+ |  |  +- p_Ion_WriteByte      (see above)
+ |  |  |  
+ |  |  +- _CALL_STAR08        
+ |  |  |    
+ |  |  +- ReadIonMCTL         
+ |  |  |  | 
+ |  |  |  +- p_Ion_ReadByte       (see above)
+ |  |  |     
+ |  |  +- ReadIonCTL1         
+ |  |     | 
+ |  |     +- p_Ion_ReadByte       (see above)
+ |  |        
+ |  +- p_Ion_WriteByte      (see above)
+ |  |  
+ |  +- _CALL_STAR08         (see above)
+ |  |  
+ |  +- Delay_Xms            (see above)
+ |  |  
+ |  +- ReadAllIonRegisters 
+ |  |  | 
+ |  |  +- p_Ion_MultiReadBytes (see above)
+ |  |  |  
+ |  |  +- _CALL_STAR08         (see above)
+ |  |  |  
+ |  |  +- p_Ion_ReadByte       (see above)
+ |  |     
+ |  +- Check_Butt0         
+ |  |  | 
+ |  |  +- Delay_Xms            (see above)
+ |  |  |  
+ |  |  +- AutoCalibration_Ion 
+ |  |     | 
+ |  |     +- SetUp_GselectIon    
+ |  |     |  | 
+ |  |     |  +- p_Ion_ReadByte       (see above)
+ |  |     |  |  
+ |  |     |  +- p_Ion_WriteByte      (see above)
+ |  |     |  |  
+ |  |     |  +- _CALL_STAR08         (see above)
+ |  |     |  |  
+ |  |     |  +- ReadIonMCTL          (see above)
+ |  |     |     
+ |  |     +- p_Ion_MultiReadBytes (see above)
+ |  |     |  
+ |  |     +- _CALL_STAR08         (see above)
+ |  |     |  
+ |  |     +- p_Ion_ReadByte       (see above)
+ |  |     |  
+ |  |     +- _IDIVS_STAR08       
+ |  |     |  | 
+ |  |     |  +- _SPLITSIGN          
+ |  |     |     | 
+ |  |     |     +- _IDIVMOD            
+ |  |     |          
+ |  |     +- p_Ion_WriteByte      (see above)
+ |  |     |  
+ |  |     +- FlashErase1         
+ |  |     |    
+ |  |     +- FlashProgBurst      
+ |  |        | 
+ |  |        +- SpSubEndBurst       
+ |  |             
+ |  +- Check_Butt1         
+ |  |  | 
+ |  |  +- Delay_Xms            (see above)
+ |  |  |  
+ |  |  +- Set_SelfTest        
+ |  |     | 
+ |  |     +- p_Ion_ReadByte       (see above)
+ |  |     |  
+ |  |     +- p_Ion_WriteByte      (see above)
+ |  |     |  
+ |  |     +- _CALL_STAR08         (see above)
+ |  |     |  
+ |  |     +- ReadIonMCTL          (see above)
+ |  |        
+ |  +- Check_Butt2         
+ |  |  | 
+ |  |  +- Delay_Xms            (see above)
+ |  |  |  
+ |  |  +- Clear_SelfTest      
+ |  |  |  | 
+ |  |  |  +- p_Ion_ReadByte       (see above)
+ |  |  |  |  
+ |  |  |  +- p_Ion_WriteByte      (see above)
+ |  |  |  |  
+ |  |  |  +- _CALL_STAR08         (see above)
+ |  |  |  |  
+ |  |  |  +- ReadIonMCTL          (see above)
+ |  |  |     
+ |  |  +- SetUp_ModeOfSensorIon
+ |  |     | 
+ |  |     +- Ion_SwitchMode      
+ |  |     |  | 
+ |  |     |  +- p_Ion_ReadByte       (see above)
+ |  |     |  |  
+ |  |     |  +- p_Ion_WriteByte      (see above)
+ |  |     |  |  
+ |  |     |  +- _CALL_STAR08         (see above)
+ |  |     |  |  
+ |  |     |  +- ReadIonMCTL          (see above)
+ |  |     |     
+ |  |     +- p_Ion_ReadByte       (see above)
+ |  |     |  
+ |  |     +- p_Ion_WriteByte      (see above)
+ |  |     |  
+ |  |     +- _CALL_STAR08         (see above)
+ |  |     |  
+ |  |     +- ReadIonMCTL          (see above)
+ |  |     |  
+ |  |     +- ReadIonCTL1          (see above)
+ |  |        
+ |  +- Check_Butt3         
+ |  |  | 
+ |  |  +- Delay_Xms            (see above)
+ |  |  |  
+ |  |  +- ReadAllIonRegisters  (see above)
+ |  |     
+ |  +- Read_AccelerometerIon
+ |  |  | 
+ |  |  +- p_Ion_MultiReadBytes (see above)
+ |  |  |  
+ |  |  +- _CALL_STAR08         (see above)
+ |  |  |  
+ |  |  +- p_Ion_ReadByte       (see above)
+ |  |     
+ |  +- DisplaySCI_Ion      
+ |     | 
+ |     +- Tx_byte_SCI         
+ |          
+ +- _Startup            
+    | 
+    +- Init                
+    |  | 
+    |  +- loadByte            
+    |       
+    +- main                 (see above)
+       
+*********************************************************************************************
+STATISTIC SECTION
+---------------------------------------------------------------------------------------------
+
+ExeFile:
+--------
+Number of blocks to be downloaded: 6
+Total size of all blocks to be downloaded: 3506
+
