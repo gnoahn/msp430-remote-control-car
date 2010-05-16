@@ -18,7 +18,8 @@
 #define PIN_MOSI    BIT1    // Porta 3
 #define PIN_MISO    BIT2    // Porta 3
 #define PIN_SCK     BIT3    // Porta 3
-#define PIN_CS      BIT4    // Porta 4
+#define PIN_CS_RF   BIT0    // Porta 3
+#define PIN_CS_ACC  BIT4    // Porta 4
 
 #define XOUTL       0x00    // LSB de X em 10 bits
 #define XOUTH       0x01    // MSB de X em 10 bits
@@ -54,8 +55,16 @@
 //#############################################################################
 //#############################################################################
 
+unsigned char xdata;
+unsigned char ydata;
+unsigned char zdata;
+
+//#############################################################################
+//#############################################################################
+
 unsigned char ReadRegister(unsigned char address);
 unsigned char WriteRegister(unsigned char address, unsigned char data);
+unsigned char SendData(unsigned char data);
 
 //#############################################################################
 //#############################################################################
@@ -74,8 +83,11 @@ int main(void)
   P2IES = 0;
   P2IFG = P2IFG & (~PIN_INT1) & (~PIN_INT2);
 
-  P4DIR = P4DIR | PIN_CS;                         // Configura pino CS.
-  P4OUT = P4OUT | PIN_CS;
+  P4DIR = P4DIR | PIN_CS_ACC;                     // Configura pino CS do acelerômetro.
+  P4OUT = P4OUT | PIN_CS_ACC;
+  
+  P3DIR = P3DIR | PIN_CS_RF;                     // Configura pino CS do RF transceiver.
+  P3OUT = P3OUT | PIN_CS_RF;  
   
   P3SEL = P3SEL | PIN_MOSI | PIN_MISO | PIN_SCK;  // Configura pinos SPI.
 
@@ -84,23 +96,28 @@ int main(void)
   UCB0BR0  = 0x02;
   UCB0BR1  = 0x00;
   UCB0CTL1 = UCB0CTL1 & (~UCSWRST);
+  
+                                             // Configura acelerômetro.
+  
+  __enable_interrupt();                      // Habilita interrupções.
+  
+  while(1);                                  // Aguarda interrupção.
 }
 
 //#############################################################################
 //#############################################################################
 
-#pragma vector = PORT_INT_VECTOR
+#pragma vector = PORT2_VECTOR
 __interrupt void interruption_vector(void)
 {
-  if (P2IN & PIN_INT1)
-  {
-    xdata = ReadRegister(XOUT8);
-    delay(??);
-    ydata = ReadRegister(YOUT8);
-    delay(??);
-    zdata = ReadRegister(ZOUT8);
-    P2IFG = P2IFG & (~PIN_INT1);
-  }
+  xdata = ReadRegister(XOUT8);
+  SendData(xdata);
+  
+  ydata = ReadRegister(YOUT8);
+  SendData(ydata);
+  
+  zdata = ReadRegister(ZOUT8);
+  SendData(zdata);
 }
 
 //#############################################################################
@@ -111,19 +128,19 @@ unsigned char ReadRegister(unsigned char address)
   unsigned char data;
   unsigned char trash;
   
-  P4OUT = P4OUT & (~PIN_CS);  
+  P4OUT = P4OUT & (~PIN_CS_ACC);  
   
   trash = UCB0RXBUF;
   
   UCB0TXBUF = address;
-  while (!IFG2_bit.UCB0RXIFG);
+  while (!UCB0RXIFG);    // while (!IFG2_bit.UCB0RXIFG); [#include <io430.h>]
   trash = UCB0RXBUF;
   
-  UCB0TXBUF = 0;                  // trash = 0; UCB0TXBUF = trash;
-  while (!IFG2_bit.UCB0RXIFG);
+  UCB0TXBUF = 0;         // trash = 0; UCB0TXBUF = trash;
+  while (!UCB0RXIFG);
   data = UCB0RXBUF;
   
-  P4OUT = P4OUT | PIN_CS;
+  P4OUT = P4OUT | PIN_CS_ACC;
   
   return data;
 }
@@ -135,19 +152,39 @@ unsigned char WriteRegister(unsigned char address, unsigned char data)
 {
   unsigned char trash;
   
-  P4OUT = P4OUT & (~PIN_CS);
+  P4OUT = P4OUT & (~PIN_CS_ACC);
   
   trash = UCB0RXBUF;
   
   UCB0TXBUF = address;
-  while (!IFG2_bit.UCB0RXIFG);
+  while (!UCB0RXIFG);
   trash = UCB0RXBUF;
   
   UCB0TXBUF = data;
-  while (!IFG2_bit.UCB0RXIFG);
+  while (!UCB0RXIFG);
   trash = UCB0RXBUF;
   
-  P4OUT = P4OUT | PIN_CS;
+  P4OUT = P4OUT | PIN_CS_ACC;
+  
+  return(0);
+}
+
+//#############################################################################
+//#############################################################################
+
+unsigned char SendData(unsigned char data)
+{
+  unsigned char trash;
+  
+  P3OUT = P3OUT & (~PIN_CS_RF);
+
+  trash = UCB0RXBUF;
+  
+  UCB0TXBUF = data;
+  while (!UCB0RXIFG);
+  trash = UCB0RXBUF;
+  
+  P3OUT = P3OUT | PIN_CS_RF;
   
   return(0);
 }
