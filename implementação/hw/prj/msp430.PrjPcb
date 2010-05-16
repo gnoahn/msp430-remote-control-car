@@ -79,6 +79,9 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
+[GeneratedDocument1]
+DocumentPath=ProjectOutputs\Design Rule Check - msp430_pcb.html
+
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
