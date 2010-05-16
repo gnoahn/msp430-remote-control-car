@@ -1,3 +1,12 @@
+[State Storage]
+Control Register=-1
+[Sequencer]
+Control Register=-1
+NextState0=-1
+NextState1=-1
+[Action Register]
+Break=-1
+State Storage=-1
 [Interrupts]
 Enabled=1
 [MemoryMap]
@@ -10,15 +19,6 @@ ActionState=1
 [TraceHelper]
 Enabled=0
 ShowSource=1
-[State Storage]
-Control Register=-1
-[Sequencer]
-Control Register=-1
-NextState0=-1
-NextState1=-1
-[Action Register]
-Break=-1
-State Storage=-1
 [Breakpoints]
 Count=0
 [FET]
