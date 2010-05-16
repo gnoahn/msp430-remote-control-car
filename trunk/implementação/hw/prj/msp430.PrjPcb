@@ -79,8 +79,63 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
+[Document5]
+DocumentPath=CAMtastic1.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
+[Document6]
+DocumentPath=CAMtastic2.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
 [GeneratedDocument1]
-DocumentPath=ProjectOutputs\Design Rule Check - msp430_pcb.html
+DocumentPath=Project Outputs for msp430\msp430_pcb.DRL
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for msp430\msp430_pcb.DRR
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for msp430\msp430_pcb.EXTREP
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for msp430\msp430_pcb.GBL
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for msp430\msp430_pcb.GKO
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for msp430\msp430_pcb.GTL
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for msp430\msp430_pcb.LDP
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for msp430\msp430_pcb.REP
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for msp430\msp430_pcb.RUL
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for msp430\msp430_pcb.TXT
 
 [OutputGroup1]
 Name=Netlist Outputs
