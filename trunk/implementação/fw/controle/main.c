@@ -89,35 +89,32 @@ int main(void)
   P3DIR = P3DIR | PIN_CS_RF;                     // Configura pino CS do RF transceiver.
   P3OUT = P3OUT | PIN_CS_RF;  
   
-  P3SEL = P3SEL | PIN_MOSI | PIN_MISO | PIN_SCK;  // Configura pinos SPI.
+  P3SEL = P3SEL | PIN_MOSI | PIN_MISO | PIN_SCK; // Configura pinos SPI.
 
   UCB0CTL0 = UCB0CTL0 | UCSYNC | UCMODE_1 | UCMST | UCMSB | UCCKPH;    // Configura SPI.
   UCB0CTL1 = UCB0CTL1 | UCSSEL_2;
   UCB0BR0  = 0x02;
   UCB0BR1  = 0x00;
   UCB0CTL1 = UCB0CTL1 & (~UCSWRST);
-  
-                                             // Configura acelerômetro.
-  
-  __enable_interrupt();                      // Habilita interrupções.
-  
-  while(1);                                  // Aguarda interrupção.
-}
 
-//#############################################################################
-//#############################################################################
-
-#pragma vector = PORT2_VECTOR
-__interrupt void interruption_vector(void)
-{
-  xdata = ReadRegister(XOUT8);
-  SendData(xdata);
+  P4OUT = P4OUT & (~PIN_CS_ACC);              // Configura acelerômetro.
+  WriteRegister (MCTL, 0x05);
+  ReadRegister (MCTL);
+  xdata = ReadRegister (XOUT8);
+  ydata = ReadRegister (YOUT8);
+  zdata = ReadRegister (ZOUT8);
   
-  ydata = ReadRegister(YOUT8);
-  SendData(ydata);
+  for(;;)
+  {
+    xdata = ReadRegister(XOUT8);
+    SendData(xdata);
   
-  zdata = ReadRegister(ZOUT8);
-  SendData(zdata);
+    ydata = ReadRegister(YOUT8);
+    SendData(ydata);
+  
+    zdata = ReadRegister(ZOUT8);
+    SendData(zdata);
+  }
 }
 
 //#############################################################################
@@ -132,11 +129,11 @@ unsigned char ReadRegister(unsigned char address)
   
   trash = UCB0RXBUF;
   
-  UCB0TXBUF = address;
-  while (!UCB0RXIFG);    // while (!IFG2_bit.UCB0RXIFG); [#include <io430.h>]
+  UCB0TXBUF = address << 1; // comando de leitura -> MSB = 0, LSB = X
+  while (!UCB0RXIFG);       // while (!IFG2_bit.UCB0RXIFG); [#include <io430.h>]
   trash = UCB0RXBUF;
   
-  UCB0TXBUF = 0;         // trash = 0; UCB0TXBUF = trash;
+  UCB0TXBUF = 0;            // trash = 0; UCB0TXBUF = trash;
   while (!UCB0RXIFG);
   data = UCB0RXBUF;
   
@@ -155,6 +152,8 @@ unsigned char WriteRegister(unsigned char address, unsigned char data)
   P4OUT = P4OUT & (~PIN_CS_ACC);
   
   trash = UCB0RXBUF;
+  
+  address = (address << 1) | 0x80; // comando de escrita -> MSB = 1
   
   UCB0TXBUF = address;
   while (!UCB0RXIFG);
