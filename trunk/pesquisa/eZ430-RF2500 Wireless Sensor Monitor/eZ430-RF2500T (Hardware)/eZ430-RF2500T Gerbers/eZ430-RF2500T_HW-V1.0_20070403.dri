@@ -1,0 +1,48 @@
+Drill Station Info File: C:/Documents and Settings/a0869571/My Documents/Tools/eZ430-RF/Board Source/AMB2521_HW-V1.0_20070403.dri
+
+ Date              :  7/10/2007 10:55:03a
+ Drills            : C:/Documents and Settings/a0869571/My Documents/Tools/eZ430-RF/Board Source/AMB2521_HW-V1.0_20070403.drl
+ Device            : Excellon drill station
+
+Parameter settings:
+
+ Tolerance Drill + :  2.50 %
+ Tolerance Drill - :  2.50 %
+ Rotate            : no
+ Mirror            : no
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : 0inch
+ OffsetY           : 0inch
+ Layers            : Drills Holes
+
+Drill File Info:
+
+ Data Mode         : Absolute
+ Units             : 1/10000 Inch
+
+Drill Tolerances:
+
+ -- Requested --  -- Used Drill --
+
+ Size       used  Code  Size
+
+ 0.0394inch    18  T04   0.0390inch
+ 0.0118inch    31  T02   0.0120inch
+ 0.0236inch     6  T03   0.0240inch
+ 0.0079inch    55  T01   0.0080inch
+
+Drills used:
+
+ Code  Size       used
+
+ T01   0.0080inch    55
+ T02   0.0120inch    31
+ T03   0.0240inch     6
+ T04   0.0390inch    18
+
+Total number of drills: 110
+
+Plotfiles:
+
+ C:/Documents and Settings/a0869571/My Documents/Tools/eZ430-RF/Board Source/AMB2521_HW-V1.0_20070403.drd
