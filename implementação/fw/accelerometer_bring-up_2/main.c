@@ -94,38 +94,34 @@ int main(void)
   UCB0BR1  = 0x00;
   UCB0CTL1 = UCB0CTL1 & (~UCSWRST);
 
-  P4OUT = P4OUT & (~PIN_CS_ACC);              // Configura acelerômetro.
-  WriteRegister(MCTL, 0x05);
+  P4OUT = P4OUT & (~PIN_CS_ACC);  // Configura acelerômetro.
+  WriteRegister(MCTL, 0x01);      // 8g = 0x01
 
-  /////////////////////////////////////////////////////////////////////////////
-  
   for(;;)
   {
-    if (ReadRegister(XOUT8) > 0x20) // P/ FRENTE
+    xdata = ReadRegister(XOUT8);
+    ydata = ReadRegister(YOUT8);
+    zdata = ReadRegister(ZOUT8);
+    
+    if (((zdata < 0x1F) & (zdata > 0x0B)) & ((xdata > 0x0B) & (xdata < 0x1F)))  // se p/ cima e inclinado p/ frente, então vai p/ FRENTE
     {
       P2OUT = P2OUT | PIN_LED2;
+      if ((ydata < 0xFC) & (ydata > 0xE1)) {P2OUT = P2OUT | PIN_LED3;}              // DIREITA  (y): -2g < G < 0g
+      if ((ydata > 0x04) & (ydata < 0x1F)) {P2OUT = P2OUT | PIN_LED1;}              // ESQUERDA (y): 0g < G < +2g
+      if ((ydata > 0xFE) | (ydata < 0x02)) {P2OUT = P2OUT & ~PIN_LED1 & ~PIN_LED3;} // REPOUSO  (y): ~0g     
     }
-    else
+    
+    if (((zdata < 0x1F) & (zdata > 0x0B)) & ((xdata < 0x06) | (xdata > 0xFC))) // se p/ cima e não inclinado p/ frente, então não vai p/ FRENTE
     {
       P2OUT = P2OUT & ~PIN_LED2;
+      if ((ydata < 0xFC) & (ydata > 0xE1)) {P2OUT = P2OUT | PIN_LED3;}              // DIREITA  (y): -2g < G < 0g
+      if ((ydata > 0x04) & (ydata < 0x1F)) {P2OUT = P2OUT | PIN_LED1;}              // ESQUERDA (y): 0g < G < +2g
+      if ((ydata > 0xFE) | (ydata < 0x02)) {P2OUT = P2OUT & ~PIN_LED1 & ~PIN_LED3;} // REPOUSO  (y): ~0g  
     }
     
-    if (ReadRegister(YOUT8) < 0x7F) // P/ DIREITA
+    if ((zdata > 0x80) | (zdata < 0x06)) // se p/ baixo, então não faz NADA
     {
-      P2OUT = P2OUT | PIN_LED1;
-    }
-    else
-    {
-      P2OUT = P2OUT & ~PIN_LED1;
-    }
-    
-    if (ReadRegister(YOUT8) > 0x80) // P/ ESQUERDA
-    {
-      P2OUT = P2OUT | PIN_LED3;
-    }
-    else
-    {
-      P2OUT = P2OUT & ~PIN_LED3;
+      P2OUT = P2OUT & ~PIN_LED1 & ~PIN_LED2 & ~PIN_LED3;
     }
   }
 }
