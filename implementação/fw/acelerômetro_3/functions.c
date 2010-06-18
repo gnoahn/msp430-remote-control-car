@@ -1,60 +1,45 @@
-//#############################################################################
-// Projeto: MSP430 Remote Control Car
-// Descrição: Funções diversas relacionadas a comunicação SPI.
-//#############################################################################
-
 #include "include.h"
 
-//#############################################################################
-//#############################################################################
+unsigned char WriteRegister(unsigned char address, unsigned char data)
+{
+  P4OUT = P4OUT & (~PIN_CS_ACC);
+  
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = (address << 1) | 0x80;
+  while (!(IFG2 & UCB0RXIFG));
+  IFG2 = IFG2 & (~UCB0TXIFG) & (~UCB0RXIFG);
+    
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = data;
+  while (!(IFG2 & UCB0RXIFG));
+  IFG2 = IFG2 & (~UCB0TXIFG) & (~UCB0RXIFG);
+  
+  P4OUT = P4OUT | PIN_CS_ACC;
+  
+  return (0);
+}
 
 unsigned char ReadRegister(unsigned char address)
 {
   unsigned char data;
-  unsigned char trash;
+ 
+  P4OUT = P4OUT & (~PIN_CS_ACC);
   
-  P4OUT = P4OUT & (~PIN_CS_ACC);  
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = address << 1;
   
-  trash = UCB0RXBUF;
+  while (!(IFG2 & UCB0TXIFG));
   
-  UCB0TXBUF = address << 1; // Read command -> MSB = 0, LSB = X
+  UCB0TXBUF = 0x00;
+  
   while (!(IFG2 & UCB0RXIFG));
-  trash = UCB0RXBUF;
+  IFG2 = IFG2 & (~UCB0RXIFG);
   
-  UCB0TXBUF = 0;            // trash = 0; UCB0TXBUF = trash;
   while (!(IFG2 & UCB0RXIFG));
+  
   data = UCB0RXBUF;
   
   P4OUT = P4OUT | PIN_CS_ACC;
   
   return data;
 }
-
-//#############################################################################
-//#############################################################################
-
-unsigned char WriteRegister(unsigned char address, unsigned char data)
-{
-  unsigned char trash;
-  
-  P4OUT = P4OUT & (~PIN_CS_ACC);
-  
-  trash = UCB0RXBUF;
-  
-  address = (address << 1) | 0x80; // Write command -> MSB = 1
-  
-  UCB0TXBUF = address;
-  while (!(IFG2 & UCB0RXIFG));
-  trash = UCB0RXBUF;
-  
-  UCB0TXBUF = data;
-  while (!(IFG2 & UCB0RXIFG));
-  trash = UCB0RXBUF;
-  
-  P4OUT = P4OUT | PIN_CS_ACC;
-  
-  return(0);
-}
-
-//#############################################################################
-//#############################################################################

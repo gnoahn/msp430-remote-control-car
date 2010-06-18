@@ -1737,9 +1737,6 @@
     <name>$PROJ_DIR$\functions.c</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\include.h</name>
-  </file>
-  <file>
     <name>$PROJ_DIR$\main.c</name>
   </file>
 </project>
