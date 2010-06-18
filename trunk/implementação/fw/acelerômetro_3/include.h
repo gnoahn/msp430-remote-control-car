@@ -15,7 +15,7 @@
 #define PIN_INT1    BIT0    // Porta 2
 #define PIN_INT2    BIT1    // Porta 2
 
-#define PIN_MOSI    BIT1    // Porta 3
+#define PIN_SDATA   BIT1    // Porta 3
 #define PIN_MISO    BIT2    // Porta 3
 #define PIN_SCK     BIT3    // Porta 3
 #define PIN_CS_RF   BIT0    // Porta 3
@@ -54,13 +54,6 @@
 #define PW          0x1C    // Duração do pulso
 #define LT          0x1D    // Tempo de latência
 #define TW          0x1E    // Janela de tempo para o 2o pulso
-
-//#############################################################################
-//#############################################################################
-
-unsigned char xdata;
-unsigned char ydata;
-unsigned char zdata;
 
 //#############################################################################
 //#############################################################################
