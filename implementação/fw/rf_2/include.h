@@ -20,6 +20,8 @@ void BurstWriteRegister(char, char*, char);
 #define PIN_SCK     BIT3
 #define PIN_CS_RF   BIT0
 
+#define PIN_SWITCH  BIT2
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -91,7 +93,7 @@ void BurstWriteRegister(char, char*, char);
 #define TEST1       0x2D        // Various test settings
 #define TEST0       0x2E        // Various test settings
 
-// RF Controller Status registers
+// RF Controller Status Registers
 #define PARTNUM      0x30       // Part number
 #define VERSION      0x31       // Current version number
 #define FREQEST      0x32       // Frequency offset estimate
@@ -104,10 +106,16 @@ void BurstWriteRegister(char, char*, char);
 #define VCO_VC_DAC   0x39       // Current setting from PLL cal module
 #define TXBYTES      0x3A       // Underflow and # of bytes in TXFIFO
 #define RXBYTES      0x3B       // Overflow and # of bytes in RXFIFO
+#define PATABLE      0x3E
 #define NUM_RXBYTES  0x7F       // Mask "# of bytes" field in _RXBYTES
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+// Auxiliary Definitions
+
+#define BURST_BIT  0x40
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -115,14 +123,6 @@ void BurstWriteRegister(char, char*, char);
 #define TI_CC_LED_PxDIR         P1DIR
 #define TI_CC_LED1              BIT0
 #define TI_CC_LED2              BIT1
-
-#define TI_CC_SW_PxIN           P1IN
-#define TI_CC_SW_PxIE           P1IE
-#define TI_CC_SW_PxIES          P1IES
-#define TI_CC_SW_PxIFG          P1IFG
-#define TI_CC_SW_PxREN          P1REN
-#define TI_CC_SW_PxOUT          P1OUT
-#define TI_CC_SW1               BIT2
 
 #define TI_CC_GDO0_PxOUT        P2OUT
 #define TI_CC_GDO0_PxIN         P2IN
@@ -143,7 +143,7 @@ void BurstWriteRegister(char, char*, char);
 #define TI_CC_GDO2_PIN          BIT7
 
 // Other memory locations
-#define TI_CCxxx0_PATABLE      0x3E
+
 #define TI_CCxxx0_TXFIFO       0x3F
 #define TI_CCxxx0_RXFIFO       0x3F
 
@@ -152,7 +152,6 @@ void BurstWriteRegister(char, char*, char);
 #define TI_CCxxx0_CRC_OK       0x80        // Mask "CRC_OK" bit within LQI byte
 
 // Definitions to support burst/single access:
-#define TI_CCxxx0_WRITE_BURST  0x40
 #define TI_CCxxx0_READ_SINGLE  0x80
 #define TI_CCxxx0_READ_BURST   0xC0
 
@@ -160,6 +159,5 @@ char TI_CC_SPIReadReg(char);
 void TI_CC_SPIReadBurstReg(char, char *, char);
 char TI_CC_SPIReadStatus(char);
 void TI_CC_SPIStrobe(char);
-
 void RFSendPacket(char *, char);
 char RFReceivePacket(char *, char *);

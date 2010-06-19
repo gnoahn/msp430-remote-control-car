@@ -1,8 +1,5 @@
 #include "include.h"
 
-char paTable[] = {0xFB};
-char paTableLen = 1;
-
 char txBuffer[4];
 char rxBuffer[4];
 unsigned int i = 0;
@@ -12,21 +9,16 @@ void main (void)
   WDTCTL = WDTPW | WDTHOLD;
 
   SPIInitialization();
-  
-  P2SEL = 0; // Configura P2.6 (GDO0) e P2.7 (GDO2) como IOs
-  
   RFInitialization();
-  
   RFConfiguration();
-  
-  BurstWriteRegister(TI_CCxxx0_PATABLE, paTable, paTableLen);//Write PATABLE
 
   // Configure ports -- switch inputs, LEDs, GDO0 to RX packet info from CCxxxx
-  TI_CC_SW_PxREN = TI_CC_SW1;               // Enable Pull up resistor
-  TI_CC_SW_PxOUT = TI_CC_SW1;               // Enable pull up resistor
-  TI_CC_SW_PxIES = TI_CC_SW1;               // Int on falling edge
-  TI_CC_SW_PxIFG &= ~(TI_CC_SW1);           // Clr flags
-  TI_CC_SW_PxIE = TI_CC_SW1;                // Activate interrupt enables
+  P1REN = PIN_SWITCH;
+  P1OUT = PIN_SWITCH;
+  P1IES = PIN_SWITCH;
+  P1IFG = P1IFG & (~PIN_SWITCH);
+  P1IE = PIN_SWITCH;
+  
   TI_CC_LED_PxOUT &= ~(TI_CC_LED1 + TI_CC_LED2); // Outputs = 0
   TI_CC_LED_PxDIR |= TI_CC_LED1 + TI_CC_LED2;// LED Direction to Outputs
 
@@ -41,22 +33,21 @@ void main (void)
   __bis_SR_register(LPM3_bits + GIE);       // Enter LPM3, enable interrupts
 }
 
-
 // The ISR assumes the interrupt came from a pressed button
 #pragma vector=PORT1_VECTOR
 __interrupt void Port1_ISR (void)
 {
   // If Switch was pressed
-  if(TI_CC_SW_PxIFG & TI_CC_SW1)
+  if(P1IFG & PIN_SWITCH)
   {
     // Build packet
     txBuffer[0] = 2;                        // Packet length
     txBuffer[1] = 0x01;                     // Packet address
-    txBuffer[2] = (~TI_CC_SW_PxIFG << 1) & 0x02; // Load switch inputs
+    txBuffer[2] = (~P1IFG << 1) & 0x02; // Load switch inputs
     RFSendPacket(txBuffer, 3);              // Send value over RF
     __delay_cycles(5000);                   // Switch debounce
   }
-  TI_CC_SW_PxIFG &= ~(TI_CC_SW1);           // Clr flag that caused int
+  P1IFG &= ~(PIN_SWITCH);           // Clr flag that caused int
 }
 
 // The ISR assumes the interrupt came from GDO0. GDO0 fires indicating that

@@ -34,6 +34,8 @@ void SPIInitialization(void)
 
 void RFInitialization(void)
 {
+  P2SEL = 0; // Configure P2.6 (GDO0) and P2.7 (GDO2) as GPIOs
+  
   P3OUT = P3OUT | PIN_CS_RF;
   Delay(30);
   P3OUT = P3OUT & (~PIN_CS_RF);
@@ -89,6 +91,7 @@ void RFConfiguration(void)
     WriteRegister(TEST2,    0x88); // Various test settings.
     WriteRegister(TEST1,    0x31); // Various test settings.
     WriteRegister(TEST0,    0x0B); // Various test settings.
+    WriteRegister(PATABLE,  0xFE); // RF Power.
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,20 +111,22 @@ void WriteRegister(char address, char data)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-
-void BurstWriteRegister(char addr, char *buffer, char count)
+void BurstWriteRegister(char address, char *buffer, char count)
 {
-  unsigned int i;
+  unsigned int aux;
 
   P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = addr | TI_CCxxx0_WRITE_BURST; // Send address
-  for (i = 0; i < count; i++)
+  
+  while (!(IFG2&UCB0TXIFG));
+  UCB0TXBUF = address | BURST_BIT;
+  
+  for (aux = 0; aux < count; aux++)
   {
-    while (!(IFG2&UCB0TXIFG));              // Wait for TXBUF ready
-    UCB0TXBUF = buffer[i];                  // Send data
+    while (!(IFG2&UCB0TXIFG));
+    UCB0TXBUF = buffer[aux];
   }
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
+  
+  while (UCB0STAT & UCBUSY);
   P3OUT = P3OUT | PIN_CS_RF;
 }
 
