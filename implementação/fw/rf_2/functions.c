@@ -1,5 +1,17 @@
 #include "include.h"
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void Delay(unsigned int cycles)
+{
+  while(cycles > 15)
+    cycles = cycles - 6;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 void SPIInitialization(void)
 {
   P3OUT = P3OUT | PIN_CS_RF;
@@ -17,11 +29,8 @@ void SPIInitialization(void)
   UCB0CTL1 = UCB0CTL1 & (~UCSWRST);
 }
 
-void Delay(unsigned int cycles)
-{
-  while(cycles > 15)
-    cycles = cycles - 6;
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 void RFInitialization(void)
 {
@@ -32,78 +41,75 @@ void RFInitialization(void)
   P3OUT = P3OUT | PIN_CS_RF;
   Delay(45);
   P3OUT = P3OUT & (~PIN_CS_RF);
+  
   while (!(IFG2&UCB0TXIFG));
   UCB0TXBUF = SRES;
+  while (UCB0STAT & UCBUSY);
+  
+  P3OUT = P3OUT | PIN_CS_RF;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void RFConfiguration(void)
+{
+    WriteRegister(IOCFG2,   0x0B); // GDO2 output pin config.
+    WriteRegister(IOCFG0,   0x06); // GDO0 output pin config.
+    WriteRegister(PKTLEN,   0xFF); // Packet length.
+    WriteRegister(PKTCTRL1, 0x05); // Packet automation control.
+    WriteRegister(PKTCTRL0, 0x05); // Packet automation control.
+    WriteRegister(ADDR,     0x01); // Device address.
+    WriteRegister(CHANNR,   0x00); // Channel number.
+    WriteRegister(FSCTRL1,  0x07); // Freq synthesizer control.
+    WriteRegister(FSCTRL0,  0x00); // Freq synthesizer control.
+    WriteRegister(FREQ2,    0x5D); // Freq control word, high byte
+    WriteRegister(FREQ1,    0x93); // Freq control word, mid byte.
+    WriteRegister(FREQ0,    0xB1); // Freq control word, low byte.
+    WriteRegister(MDMCFG4,  0x2D); // Modem configuration.
+    WriteRegister(MDMCFG3,  0x3B); // Modem configuration.
+    WriteRegister(MDMCFG2,  0x73); // Modem configuration.
+    WriteRegister(MDMCFG1,  0x22); // Modem configuration.
+    WriteRegister(MDMCFG0,  0xF8); // Modem configuration.
+    WriteRegister(DEVIATN,  0x00); // Modem dev (when FSK mod en)
+    WriteRegister(MCSM1 ,   0x3F); // MainRadio Cntrl State Machine
+    WriteRegister(MCSM0 ,   0x18); // MainRadio Cntrl State Machine
+    WriteRegister(FOCCFG,   0x1D); // Freq Offset Compens. Config
+    WriteRegister(BSCFG,    0x1C); // Bit synchronization config.
+    WriteRegister(AGCCTRL2, 0xC7); // AGC control.
+    WriteRegister(AGCCTRL1, 0x00); // AGC control.
+    WriteRegister(AGCCTRL0, 0xB2); // AGC control.
+    WriteRegister(FREND1,   0xB6); // Front end RX configuration.
+    WriteRegister(FREND0,   0x10); // Front end RX configuration.
+    WriteRegister(FSCAL3,   0xEA); // Frequency synthesizer cal.
+    WriteRegister(FSCAL2,   0x0A); // Frequency synthesizer cal.
+    WriteRegister(FSCAL1,   0x00); // Frequency synthesizer cal.
+    WriteRegister(FSCAL0,   0x11); // Frequency synthesizer cal.
+    WriteRegister(FSTEST,   0x59); // Frequency synthesizer cal.
+    WriteRegister(TEST2,    0x88); // Various test settings.
+    WriteRegister(TEST1,    0x31); // Various test settings.
+    WriteRegister(TEST0,    0x0B); // Various test settings.
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void WriteRegister(char address, char data)
+{
+  P3OUT = P3OUT & (~PIN_CS_RF);
+  while (!(IFG2&UCB0TXIFG));
+  UCB0TXBUF = address;
+  while (!(IFG2&UCB0TXIFG));
+  UCB0TXBUF = data;
   while (UCB0STAT & UCBUSY);
   P3OUT = P3OUT | PIN_CS_RF;
 }
 
-void RFConfiguration(void)
-{
-    TI_CC_SPIWriteReg(TI_CCxxx0_IOCFG2,   0x0B); // GDO2 output pin config.
-    TI_CC_SPIWriteReg(TI_CCxxx0_IOCFG0,   0x06); // GDO0 output pin config.
-    TI_CC_SPIWriteReg(TI_CCxxx0_PKTLEN,   0xFF); // Packet length.
-    TI_CC_SPIWriteReg(TI_CCxxx0_PKTCTRL1, 0x05); // Packet automation control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_PKTCTRL0, 0x05); // Packet automation control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_ADDR,     0x01); // Device address.
-    TI_CC_SPIWriteReg(TI_CCxxx0_CHANNR,   0x00); // Channel number.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCTRL1,  0x07); // Freq synthesizer control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCTRL0,  0x00); // Freq synthesizer control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FREQ2,    0x5D); // Freq control word, high byte
-    TI_CC_SPIWriteReg(TI_CCxxx0_FREQ1,    0x93); // Freq control word, mid byte.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FREQ0,    0xB1); // Freq control word, low byte.
-    TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG4,  0x2D); // Modem configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG3,  0x3B); // Modem configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG2,  0x73); // Modem configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG1,  0x22); // Modem configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG0,  0xF8); // Modem configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_DEVIATN,  0x00); // Modem dev (when FSK mod en)
-    TI_CC_SPIWriteReg(TI_CCxxx0_MCSM1 ,   0x3F); // MainRadio Cntrl State Machine
-    TI_CC_SPIWriteReg(TI_CCxxx0_MCSM0 ,   0x18); // MainRadio Cntrl State Machine
-    TI_CC_SPIWriteReg(TI_CCxxx0_FOCCFG,   0x1D); // Freq Offset Compens. Config
-    TI_CC_SPIWriteReg(TI_CCxxx0_BSCFG,    0x1C); // Bit synchronization config.
-    TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL2, 0xC7); // AGC control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL1, 0x00); // AGC control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL0, 0xB2); // AGC control.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FREND1,   0xB6); // Front end RX configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FREND0,   0x10); // Front end RX configuration.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL3,   0xEA); // Frequency synthesizer cal.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL2,   0x0A); // Frequency synthesizer cal.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL1,   0x00); // Frequency synthesizer cal.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL0,   0x11); // Frequency synthesizer cal.
-    TI_CC_SPIWriteReg(TI_CCxxx0_FSTEST,   0x59); // Frequency synthesizer cal.
-    TI_CC_SPIWriteReg(TI_CCxxx0_TEST2,    0x88); // Various test settings.
-    TI_CC_SPIWriteReg(TI_CCxxx0_TEST1,    0x31); // Various test settings.
-    TI_CC_SPIWriteReg(TI_CCxxx0_TEST0,    0x0B); // Various test settings.
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
-//------------------------------------------------------------------------------
-//  void TI_CC_SPIWriteReg(char addr, char value)
-//
-//  DESCRIPTION:
-//  Writes "value" to a single configuration register at address "addr".
-//------------------------------------------------------------------------------
-void TI_CC_SPIWriteReg(char addr, char value)
-{
-  P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = addr;                         // Send address
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = value;                        // Send data
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  P3OUT = P3OUT | PIN_CS_RF;
-}
 
-//------------------------------------------------------------------------------
-//  void TI_CC_SPIWriteBurstReg(char addr, char *buffer, char count)
-//
-//  DESCRIPTION:
-//  Writes values to multiple configuration registers, the first register being
-//  at address "addr".  First data byte is at "buffer", and both addr and
-//  buffer are incremented sequentially (within the CCxxxx and MSP430,
-//  respectively) until "count" writes have been performed.
-//------------------------------------------------------------------------------
-void TI_CC_SPIWriteBurstReg(char addr, char *buffer, char count)
+void BurstWriteRegister(char addr, char *buffer, char count)
 {
   unsigned int i;
 
@@ -233,7 +239,7 @@ void TI_CC_SPIStrobe(char strobe)
 //-----------------------------------------------------------------------------
 void RFSendPacket(char *txBuffer, char size)
 {
-  TI_CC_SPIWriteBurstReg(TI_CCxxx0_TXFIFO, txBuffer, size); // Write TX data
+  BurstWriteRegister(TI_CCxxx0_TXFIFO, txBuffer, size); // Write TX data
   TI_CC_SPIStrobe(STX);           // Change state to TX, initiating
                                             // data transfer
 
@@ -278,7 +284,7 @@ char RFReceivePacket(char *rxBuffer, char *length)
   char status[2];
   char pktLen;
 
-  if ((TI_CC_SPIReadStatus(TI_CCxxx0_RXBYTES) & TI_CCxxx0_NUM_RXBYTES))
+  if ((TI_CC_SPIReadStatus(RXBYTES) & NUM_RXBYTES))
   {
     pktLen = TI_CC_SPIReadReg(TI_CCxxx0_RXFIFO); // Read length byte
 

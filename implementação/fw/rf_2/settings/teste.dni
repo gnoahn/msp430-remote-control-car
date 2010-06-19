@@ -8,7 +8,7 @@ NextState1=34084
 Break=1
 State Storage=1
 [DebugChecksum]
-Checksum=-560542330
+Checksum=2052131694
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 1
@@ -28,13 +28,6 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Breakpoints]
 Count=0
 [FET]
@@ -57,3 +50,10 @@ SP=0
 SR=0
 all registers=0
 File name=
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
