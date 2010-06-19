@@ -11,23 +11,14 @@ void main (void)
 {
   WDTCTL = WDTPW | WDTHOLD;
 
-  P3OUT = P3OUT | PIN_CS_RF;
-  P3DIR = P3DIR | PIN_CS_RF;
-
-  UCB0CTL1 = UCB0CTL1 | UCSWRST;
-  UCB0CTL0 = UCB0CTL0 | UCMST | UCCKPH | UCMSB | UCSYNC;
-  UCB0CTL1 = UCB0CTL1 | UCSSEL_2;
-  UCB0BR0 = 0x02;
-  UCB0BR1 = 0;
+  SPIInitialization();
   
-  P3SEL = P3SEL | PIN_MOSI | PIN_MISO | PIN_SCK;
-  P3DIR = P3DIR | PIN_MOSI | PIN_SCK;
-
-  UCB0CTL1 &= ~UCSWRST;
-
   P2SEL = 0;                                // Sets P2.6 & P2.7 as GPIO
-  TI_CC_PowerupResetCCxxxx();               // Reset CCxxxx
-  writeRFSettings();                        // Write RF settings to config reg
+  
+  RFInitialization();
+  
+  RFConfiguration();                        // Write RF settings to config reg
+  
   TI_CC_SPIWriteBurstReg(TI_CCxxx0_PATABLE, paTable, paTableLen);//Write PATABLE
 
   // Configure ports -- switch inputs, LEDs, GDO0 to RX packet info from CCxxxx
@@ -43,7 +34,7 @@ void main (void)
   TI_CC_GDO0_PxIFG &= ~TI_CC_GDO0_PIN;      // Clear flag
   TI_CC_GDO0_PxIE |= TI_CC_GDO0_PIN;        // Enable int on end of packet
 
-  TI_CC_SPIStrobe(TI_CCxxx0_SRX);           // Initialize CCxxxx in RX mode.
+  TI_CC_SPIStrobe(SRX);           // Initialize CCxxxx in RX mode.
                                             // When a pkt is received, it will
                                             // signal on GDO0 and wake CPU
 
