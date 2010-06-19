@@ -8,7 +8,9 @@ void SPIInitialization(void);
 void RFInitialization(void);
 void RFConfiguration(void);
 void WriteRegister(char, char);
-void BurstWriteRegister(char, char*, char);
+void WriteStrobe(char);
+void BurstWriteRegister(char, char *, char);
+void RFSend(char *, char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +116,9 @@ void BurstWriteRegister(char, char*, char);
 #define VCO_VC_DAC   0x39       // Current setting from PLL cal module
 #define TXBYTES      0x3A       // Underflow and # of bytes in TXFIFO
 #define RXBYTES      0x3B       // Overflow and # of bytes in RXFIFO
-#define PATABLE      0x3E
+#define PATABLE      0x3E       // RF Power
+#define TXFIFO       0x3F       // TX Buffer
+#define RXFIFO       0x3F       // RX Buffer
 #define NUM_RXBYTES  0x7F       // Mask "# of bytes" field in _RXBYTES
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -127,11 +131,6 @@ void BurstWriteRegister(char, char*, char);
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-// Other memory locations
-
-#define TI_CCxxx0_TXFIFO       0x3F
-#define TI_CCxxx0_RXFIFO       0x3F
-
 // Masks for appended status bytes
 #define TI_CCxxx0_LQI_RX       0x01        // Position of LQI byte
 #define TI_CCxxx0_CRC_OK       0x80        // Mask "CRC_OK" bit within LQI byte
@@ -143,6 +142,4 @@ void BurstWriteRegister(char, char*, char);
 char TI_CC_SPIReadReg(char);
 void TI_CC_SPIReadBurstReg(char, char *, char);
 char TI_CC_SPIReadStatus(char);
-void TI_CC_SPIStrobe(char);
-void RFSendPacket(char *, char);
 char RFReceivePacket(char *, char *);
