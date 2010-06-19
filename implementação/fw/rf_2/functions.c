@@ -111,6 +111,18 @@ void WriteRegister(char address, char data)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+void WriteStrobe(char strobe)
+{
+  P3OUT = P3OUT & (~PIN_CS_RF);
+  while (!(IFG2&UCB0TXIFG));
+  UCB0TXBUF = strobe;
+  while (UCB0STAT & UCBUSY);
+  P3OUT = P3OUT | PIN_CS_RF;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 void BurstWriteRegister(char address, char *buffer, char count)
 {
   unsigned int aux;
@@ -128,6 +140,18 @@ void BurstWriteRegister(char address, char *buffer, char count)
   
   while (UCB0STAT & UCBUSY);
   P3OUT = P3OUT | PIN_CS_RF;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void RFSend(char *txBuffer, char size)
+{
+  BurstWriteRegister(TXFIFO, txBuffer, size);
+  WriteStrobe(STX);
+  while (!(P2IN & PIN_GDO0));
+  while (P2IN & PIN_GDO0);
+  P2IFG = P2IFG & (~PIN_GDO0);
 }
 
 //------------------------------------------------------------------------------
@@ -207,55 +231,6 @@ char TI_CC_SPIReadStatus(char addr)
   return status;
 }
 
-//------------------------------------------------------------------------------
-//  void TI_CC_SPIStrobe(char strobe)
-//
-//  DESCRIPTION:
-//  Special write function for writing to command strobe registers.  Writes
-//  to the strobe at address "addr".
-//------------------------------------------------------------------------------
-void TI_CC_SPIStrobe(char strobe)
-{
-  P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = strobe;                       // Send strobe
-  // Strobe addr is now being TX'ed
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  P3OUT = P3OUT | PIN_CS_RF;
-}
-
-//-----------------------------------------------------------------------------
-//  void RFSendPacket(char *txBuffer, char size)
-//
-//  DESCRIPTION:
-//  This function transmits a packet with length up to 63 bytes.  To use this
-//  function, GD00 must be configured to be asserted when sync word is sent and
-//  de-asserted at the end of the packet, which is accomplished by setting the
-//  IOCFG0 register to 0x06, per the CCxxxx datasheet.  GDO0 goes high at
-//  packet start and returns low when complete.  The function polls GDO0 to
-//  ensure packet completion before returning.
-//
-//  ARGUMENTS:
-//      char *txBuffer
-//          Pointer to a buffer containing the data to be transmitted
-//
-//      char size
-//          The size of the txBuffer
-//-----------------------------------------------------------------------------
-void RFSendPacket(char *txBuffer, char size)
-{
-  BurstWriteRegister(TI_CCxxx0_TXFIFO, txBuffer, size); // Write TX data
-  TI_CC_SPIStrobe(STX);           // Change state to TX, initiating
-                                            // data transfer
-
-  while (!(P2IN & PIN_GDO0));
-                                            // Wait GDO0 to go hi -> sync TX'ed
-  while (P2IN & PIN_GDO0);
-                                            // Wait GDO0 to clear -> end of pkt
-  P2IFG &= ~PIN_GDO0;      // After pkt TX, this flag is set.
-                                            // Has to be cleared before existing
-}
-
 //-----------------------------------------------------------------------------
 //  char RFReceivePacket(char *rxBuffer, char *length)
 //
@@ -291,20 +266,20 @@ char RFReceivePacket(char *rxBuffer, char *length)
 
   if ((TI_CC_SPIReadStatus(RXBYTES) & NUM_RXBYTES))
   {
-    pktLen = TI_CC_SPIReadReg(TI_CCxxx0_RXFIFO); // Read length byte
+    pktLen = TI_CC_SPIReadReg(RXFIFO); // Read length byte
 
     if (pktLen <= *length)                  // If pktLen size <= rxBuffer
     {
-      TI_CC_SPIReadBurstReg(TI_CCxxx0_RXFIFO, rxBuffer, pktLen); // Pull data
+      TI_CC_SPIReadBurstReg(RXFIFO, rxBuffer, pktLen); // Pull data
       *length = pktLen;                     // Return the actual size
-      TI_CC_SPIReadBurstReg(TI_CCxxx0_RXFIFO, status, 2);
+      TI_CC_SPIReadBurstReg(RXFIFO, status, 2);
                                             // Read appended status bytes
       return (char)(status[TI_CCxxx0_LQI_RX]&TI_CCxxx0_CRC_OK);
     }                                       // Return CRC_OK bit
     else
     {
       *length = pktLen;                     // Return the large size
-      TI_CC_SPIStrobe(SFRX);      // Flush RXFIFO
+      WriteStrobe(SFRX);      // Flush RXFIFO
       return 0;                             // Error
     }
   }
