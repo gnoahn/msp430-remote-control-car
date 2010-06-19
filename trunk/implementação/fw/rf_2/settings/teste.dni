@@ -1,14 +1,14 @@
 [State Storage]
-Control Register=34040
+Control Register=34036
 [Sequencer]
-Control Register=34040
-NextState0=34040
-NextState1=34040
+Control Register=34036
+NextState0=34036
+NextState1=34036
 [Action Register]
 Break=1
 State Storage=1
 [DebugChecksum]
-Checksum=778919244
+Checksum=-468321443
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 1

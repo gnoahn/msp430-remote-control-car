@@ -13,19 +13,25 @@ void BurstWriteRegister(char, char*, char);
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-// SPI pins
+// Pins Definitions
 
 #define PIN_MOSI    BIT1
 #define PIN_MISO    BIT2
 #define PIN_SCK     BIT3
 #define PIN_CS_RF   BIT0
 
+#define PIN_LED1    BIT0
+#define PIN_LED2    BIT1
+
 #define PIN_SWITCH  BIT2
+
+#define PIN_GDO0    BIT6
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 // Strobe Commands
+
 #define SRES        0x30        // Reset chip.
 #define SFSTXON     0x31        // Enable/calibrate freq synthesizer
 #define SXOFF       0x32        // Turn off crystal oscillator.
@@ -45,6 +51,7 @@ void BurstWriteRegister(char, char*, char);
 ////////////////////////////////////////////////////////////////////////////////
 
 // RF Controller Configuration Registers
+
 #define IOCFG2      0x00        // GDO2 output pin configuration
 #define IOCFG1      0x01        // GDO1 output pin configuration
 #define IOCFG0      0x02        // GDO0 output pin configuration
@@ -94,6 +101,7 @@ void BurstWriteRegister(char, char*, char);
 #define TEST0       0x2E        // Various test settings
 
 // RF Controller Status Registers
+
 #define PARTNUM      0x30       // Part number
 #define VERSION      0x31       // Current version number
 #define FREQEST      0x32       // Frequency offset estimate
@@ -118,29 +126,6 @@ void BurstWriteRegister(char, char*, char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
-#define TI_CC_LED_PxOUT         P1OUT
-#define TI_CC_LED_PxDIR         P1DIR
-#define TI_CC_LED1              BIT0
-#define TI_CC_LED2              BIT1
-
-#define TI_CC_GDO0_PxOUT        P2OUT
-#define TI_CC_GDO0_PxIN         P2IN
-#define TI_CC_GDO0_PxDIR        P2DIR
-#define TI_CC_GDO0_PxIE         P2IE
-#define TI_CC_GDO0_PxIES        P2IES
-#define TI_CC_GDO0_PxIFG        P2IFG
-#define TI_CC_GDO0_PIN          BIT6
-
-#define TI_CC_GDO1_PxOUT        P3OUT
-#define TI_CC_GDO1_PxIN         P3IN
-#define TI_CC_GDO1_PxDIR        P3DIR
-#define TI_CC_GDO1_PIN          0x04
-
-#define TI_CC_GDO2_PxOUT        P2OUT
-#define TI_CC_GDO2_PxIN         P2IN
-#define TI_CC_GDO2_PxDIR        P2DIR
-#define TI_CC_GDO2_PIN          BIT7
 
 // Other memory locations
 
