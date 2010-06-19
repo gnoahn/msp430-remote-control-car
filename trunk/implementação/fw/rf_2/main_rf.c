@@ -13,13 +13,13 @@ void main (void)
 
   SPIInitialization();
   
-  P2SEL = 0;                                // Sets P2.6 & P2.7 as GPIO
+  P2SEL = 0; // Configura P2.6 (GDO0) e P2.7 (GDO2) como IOs
   
   RFInitialization();
   
-  RFConfiguration();                        // Write RF settings to config reg
+  RFConfiguration();
   
-  TI_CC_SPIWriteBurstReg(TI_CCxxx0_PATABLE, paTable, paTableLen);//Write PATABLE
+  BurstWriteRegister(TI_CCxxx0_PATABLE, paTable, paTableLen);//Write PATABLE
 
   // Configure ports -- switch inputs, LEDs, GDO0 to RX packet info from CCxxxx
   TI_CC_SW_PxREN = TI_CC_SW1;               // Enable Pull up resistor

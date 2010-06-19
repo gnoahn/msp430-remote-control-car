@@ -3,10 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void SPIInitialization(void);
 void Delay(unsigned int);
+void SPIInitialization(void);
 void RFInitialization(void);
 void RFConfiguration(void);
+void WriteRegister(char, char);
+void BurstWriteRegister(char, char*, char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,10 +37,75 @@ void RFConfiguration(void);
 #define SFRX        0x3A        // Flush the RX FIFO buffer.
 #define SFTX        0x3B        // Flush the TX FIFO buffer.
 #define SWORRST     0x3C        // Reset real time clock.
-#define SNOP        0x3D         // No operation.
+#define SNOP        0x3D        // No operation.
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+// RF Controller Configuration Registers
+#define IOCFG2      0x00        // GDO2 output pin configuration
+#define IOCFG1      0x01        // GDO1 output pin configuration
+#define IOCFG0      0x02        // GDO0 output pin configuration
+#define FIFOTHR     0x03        // RX FIFO and TX FIFO thresholds
+#define SYNC1       0x04        // Sync word, high byte
+#define SYNC0       0x05        // Sync word, low byte
+#define PKTLEN      0x06        // Packet length
+#define PKTCTRL1    0x07        // Packet automation control
+#define PKTCTRL0    0x08        // Packet automation control
+#define ADDR        0x09        // Device address
+#define CHANNR      0x0A        // Channel number
+#define FSCTRL1     0x0B        // Frequency synthesizer control
+#define FSCTRL0     0x0C        // Frequency synthesizer control
+#define FREQ2       0x0D        // Frequency control word, high byte
+#define FREQ1       0x0E        // Frequency control word, middle byte
+#define FREQ0       0x0F        // Frequency control word, low byte
+#define MDMCFG4     0x10        // Modem configuration
+#define MDMCFG3     0x11        // Modem configuration
+#define MDMCFG2     0x12        // Modem configuration
+#define MDMCFG1     0x13        // Modem configuration
+#define MDMCFG0     0x14        // Modem configuration
+#define DEVIATN     0x15        // Modem deviation setting
+#define MCSM2       0x16        // Main Radio Cntrl State Machine config
+#define MCSM1       0x17        // Main Radio Cntrl State Machine config
+#define MCSM0       0x18        // Main Radio Cntrl State Machine config
+#define FOCCFG      0x19        // Frequency Offset Compensation config
+#define BSCFG       0x1A        // Bit Synchronization configuration
+#define AGCCTRL2    0x1B        // AGC control
+#define AGCCTRL1    0x1C        // AGC control
+#define AGCCTRL0    0x1D        // AGC control
+#define WOREVT1     0x1E        // High byte Event 0 timeout
+#define WOREVT0     0x1F        // Low byte Event 0 timeout
+#define WORCTRL     0x20        // Wake On Radio control
+#define FREND1      0x21        // Front end RX configuration
+#define FREND0      0x22        // Front end TX configuration
+#define FSCAL3      0x23        // Frequency synthesizer calibration
+#define FSCAL2      0x24        // Frequency synthesizer calibration
+#define FSCAL1      0x25        // Frequency synthesizer calibration
+#define FSCAL0      0x26        // Frequency synthesizer calibration
+#define RCCTRL1     0x27        // RC oscillator configuration
+#define RCCTRL0     0x28        // RC oscillator configuration
+#define FSTEST      0x29        // Frequency synthesizer cal control
+#define PTEST       0x2A        // Production test
+#define AGCTEST     0x2B        // AGC test
+#define TEST2       0x2C        // Various test settings
+#define TEST1       0x2D        // Various test settings
+#define TEST0       0x2E        // Various test settings
+
+// RF Controller Status registers
+#define PARTNUM      0x30       // Part number
+#define VERSION      0x31       // Current version number
+#define FREQEST      0x32       // Frequency offset estimate
+#define LQI          0x33       // Demodulator estimate for link quality
+#define RSSI         0x34       // Received signal strength indication
+#define MARCSTATE    0x35       // Control state machine state
+#define WORTIME1     0x36       // High byte of WOR timer
+#define WORTIME0     0x37       // Low byte of WOR timer
+#define PKTSTATUS    0x38       // Current GDOx status and packet status
+#define VCO_VC_DAC   0x39       // Current setting from PLL cal module
+#define TXBYTES      0x3A       // Underflow and # of bytes in TXFIFO
+#define RXBYTES      0x3B       // Overflow and # of bytes in RXFIFO
+#define NUM_RXBYTES  0x7F       // Mask "# of bytes" field in _RXBYTES
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,76 +142,6 @@ void RFConfiguration(void);
 #define TI_CC_GDO2_PxDIR        P2DIR
 #define TI_CC_GDO2_PIN          BIT7
 
-//----------------------------------------------------------------------------
-//  Description:  This file contains definitions specific to the CC1100/2500.
-//  The configuration registers, strobe commands, and status registers are 
-//  defined, as well as some common masks for these registers.
-//----------------------------------------------------------------------------
-
-// RF Controller Registers
-#define TI_CCxxx0_IOCFG2       0x00        // GDO2 output pin configuration
-#define TI_CCxxx0_IOCFG1       0x01        // GDO1 output pin configuration
-#define TI_CCxxx0_IOCFG0       0x02        // GDO0 output pin configuration
-#define TI_CCxxx0_FIFOTHR      0x03        // RX FIFO and TX FIFO thresholds
-#define TI_CCxxx0_SYNC1        0x04        // Sync word, high byte
-#define TI_CCxxx0_SYNC0        0x05        // Sync word, low byte
-#define TI_CCxxx0_PKTLEN       0x06        // Packet length
-#define TI_CCxxx0_PKTCTRL1     0x07        // Packet automation control
-#define TI_CCxxx0_PKTCTRL0     0x08        // Packet automation control
-#define TI_CCxxx0_ADDR         0x09        // Device address
-#define TI_CCxxx0_CHANNR       0x0A        // Channel number
-#define TI_CCxxx0_FSCTRL1      0x0B        // Frequency synthesizer control
-#define TI_CCxxx0_FSCTRL0      0x0C        // Frequency synthesizer control
-#define TI_CCxxx0_FREQ2        0x0D        // Frequency control word, high byte
-#define TI_CCxxx0_FREQ1        0x0E        // Frequency control word, middle byte
-#define TI_CCxxx0_FREQ0        0x0F        // Frequency control word, low byte
-#define TI_CCxxx0_MDMCFG4      0x10        // Modem configuration
-#define TI_CCxxx0_MDMCFG3      0x11        // Modem configuration
-#define TI_CCxxx0_MDMCFG2      0x12        // Modem configuration
-#define TI_CCxxx0_MDMCFG1      0x13        // Modem configuration
-#define TI_CCxxx0_MDMCFG0      0x14        // Modem configuration
-#define TI_CCxxx0_DEVIATN      0x15        // Modem deviation setting
-#define TI_CCxxx0_MCSM2        0x16        // Main Radio Cntrl State Machine config
-#define TI_CCxxx0_MCSM1        0x17        // Main Radio Cntrl State Machine config
-#define TI_CCxxx0_MCSM0        0x18        // Main Radio Cntrl State Machine config
-#define TI_CCxxx0_FOCCFG       0x19        // Frequency Offset Compensation config
-#define TI_CCxxx0_BSCFG        0x1A        // Bit Synchronization configuration
-#define TI_CCxxx0_AGCCTRL2     0x1B        // AGC control
-#define TI_CCxxx0_AGCCTRL1     0x1C        // AGC control
-#define TI_CCxxx0_AGCCTRL0     0x1D        // AGC control
-#define TI_CCxxx0_WOREVT1      0x1E        // High byte Event 0 timeout
-#define TI_CCxxx0_WOREVT0      0x1F        // Low byte Event 0 timeout
-#define TI_CCxxx0_WORCTRL      0x20        // Wake On Radio control
-#define TI_CCxxx0_FREND1       0x21        // Front end RX configuration
-#define TI_CCxxx0_FREND0       0x22        // Front end TX configuration
-#define TI_CCxxx0_FSCAL3       0x23        // Frequency synthesizer calibration
-#define TI_CCxxx0_FSCAL2       0x24        // Frequency synthesizer calibration
-#define TI_CCxxx0_FSCAL1       0x25        // Frequency synthesizer calibration
-#define TI_CCxxx0_FSCAL0       0x26        // Frequency synthesizer calibration
-#define TI_CCxxx0_RCCTRL1      0x27        // RC oscillator configuration
-#define TI_CCxxx0_RCCTRL0      0x28        // RC oscillator configuration
-#define TI_CCxxx0_FSTEST       0x29        // Frequency synthesizer cal control
-#define TI_CCxxx0_PTEST        0x2A        // Production test
-#define TI_CCxxx0_AGCTEST      0x2B        // AGC test
-#define TI_CCxxx0_TEST2        0x2C        // Various test settings
-#define TI_CCxxx0_TEST1        0x2D        // Various test settings
-#define TI_CCxxx0_TEST0        0x2E        // Various test settings
-
-// Status registers
-#define TI_CCxxx0_PARTNUM      0x30        // Part number
-#define TI_CCxxx0_VERSION      0x31        // Current version number
-#define TI_CCxxx0_FREQEST      0x32        // Frequency offset estimate
-#define TI_CCxxx0_LQI          0x33        // Demodulator estimate for link quality
-#define TI_CCxxx0_RSSI         0x34        // Received signal strength indication
-#define TI_CCxxx0_MARCSTATE    0x35        // Control state machine state
-#define TI_CCxxx0_WORTIME1     0x36        // High byte of WOR timer
-#define TI_CCxxx0_WORTIME0     0x37        // Low byte of WOR timer
-#define TI_CCxxx0_PKTSTATUS    0x38        // Current GDOx status and packet status
-#define TI_CCxxx0_VCO_VC_DAC   0x39        // Current setting from PLL cal module
-#define TI_CCxxx0_TXBYTES      0x3A        // Underflow and # of bytes in TXFIFO
-#define TI_CCxxx0_RXBYTES      0x3B        // Overflow and # of bytes in RXFIFO
-#define TI_CCxxx0_NUM_RXBYTES  0x7F        // Mask "# of bytes" field in _RXBYTES
-
 // Other memory locations
 #define TI_CCxxx0_PATABLE      0x3E
 #define TI_CCxxx0_TXFIFO       0x3F
@@ -159,8 +156,6 @@ void RFConfiguration(void);
 #define TI_CCxxx0_READ_SINGLE  0x80
 #define TI_CCxxx0_READ_BURST   0xC0
 
-void TI_CC_SPIWriteReg(char, char);
-void TI_CC_SPIWriteBurstReg(char, char*, char);
 char TI_CC_SPIReadReg(char);
 void TI_CC_SPIReadBurstReg(char, char *, char);
 char TI_CC_SPIReadStatus(char);
