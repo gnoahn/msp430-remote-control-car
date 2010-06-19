@@ -12,19 +12,20 @@ void main (void)
   RFInitialization();
   RFConfiguration();
 
-  // Configure ports -- switch inputs, LEDs, GDO0 to RX packet info from CCxxxx
+  // Configure Switch
   P1REN = PIN_SWITCH;
-  P1OUT = PIN_SWITCH;
   P1IES = PIN_SWITCH;
   P1IFG = P1IFG & (~PIN_SWITCH);
-  P1IE = PIN_SWITCH;
+  P1IE  = PIN_SWITCH;
   
-  TI_CC_LED_PxOUT &= ~(TI_CC_LED1 + TI_CC_LED2); // Outputs = 0
-  TI_CC_LED_PxDIR |= TI_CC_LED1 + TI_CC_LED2;// LED Direction to Outputs
+  // Configure LEDs
+  P1OUT = P1OUT & (~PIN_LED1) & (~PIN_LED2);
+  P1DIR = P1DIR | PIN_LED1 | PIN_LED2;
 
-  TI_CC_GDO0_PxIES |= TI_CC_GDO0_PIN;       // Int on falling edge (end of pkt)
-  TI_CC_GDO0_PxIFG &= ~TI_CC_GDO0_PIN;      // Clear flag
-  TI_CC_GDO0_PxIE |= TI_CC_GDO0_PIN;        // Enable int on end of packet
+  // Configure GDO0 to RX packet info from CC2500
+  P2IES = P2IES | PIN_GDO0;
+  P2IFG = P2IFG & (~PIN_GDO0);
+  P2IE  = P2IE | PIN_GDO0;
 
   TI_CC_SPIStrobe(SRX);           // Initialize CCxxxx in RX mode.
                                             // When a pkt is received, it will
@@ -56,14 +57,14 @@ __interrupt void Port1_ISR (void)
 __interrupt void Port2_ISR(void)
 {
     // if GDO fired
-  if(TI_CC_GDO0_PxIFG & TI_CC_GDO0_PIN)
+  if(P2IFG & PIN_GDO0)
   {
     char len=2;                             // Len of pkt to be RXed (only addr
                                             // plus data; size byte not incl b/c
                                             // stripped away within RX function)
     if (RFReceivePacket(rxBuffer,&len))     // Fetch packet from CCxxxx
-    TI_CC_LED_PxOUT ^= rxBuffer[1];         // Toggle LEDs according to pkt data
+    P1OUT ^= rxBuffer[1];         // Toggle LEDs according to pkt data
   }
 
-  TI_CC_GDO0_PxIFG &= ~TI_CC_GDO0_PIN;      // After pkt RX, this flag is set.
+  P2IFG &= ~PIN_GDO0;      // After pkt RX, this flag is set.
 }
