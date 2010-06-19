@@ -1,27 +1,47 @@
 #include "msp430.h"
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+void SPIInitialization(void);
+void Delay(unsigned int);
+void RFInitialization(void);
+void RFConfiguration(void);
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+// SPI pins
+
 #define PIN_MOSI    BIT1
 #define PIN_MISO    BIT2
 #define PIN_SCK     BIT3
 #define PIN_CS_RF   BIT0
 
-//******************************************************************************
-//  These constants are used to identify the chosen SPI and UART interfaces.
-//******************************************************************************
-#define TI_CC_SER_INTF_NULL    0
-#define TI_CC_SER_INTF_USART0  1
-#define TI_CC_SER_INTF_USART1  2
-#define TI_CC_SER_INTF_USCIA0  3
-#define TI_CC_SER_INTF_USCIA1  4
-#define TI_CC_SER_INTF_USCIA2  5
-#define TI_CC_SER_INTF_USCIA3  6
-#define TI_CC_SER_INTF_USCIB0  7
-#define TI_CC_SER_INTF_USCIB1  8
-#define TI_CC_SER_INTF_USCIB2  9
-#define TI_CC_SER_INTF_USCIB3  10
-#define TI_CC_SER_INTF_USI     11
-#define TI_CC_SER_INTF_BITBANG 12
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
+// Strobe Commands
+#define SRES        0x30        // Reset chip.
+#define SFSTXON     0x31        // Enable/calibrate freq synthesizer
+#define SXOFF       0x32        // Turn off crystal oscillator.
+#define SCAL        0x33        // Calibrate freq synthesizer & disable
+#define SRX         0x34        // Enable RX.
+#define STX         0x35        // Enable TX.
+#define SIDLE       0x36        // Exit RX / TX
+#define SAFC        0x37        // AFC adjustment of freq synthesizer
+#define SWOR        0x38        // Start automatic RX polling sequence
+#define SPWD        0x39        // Enter pwr down mode when CSn goes hi
+#define SFRX        0x3A        // Flush the RX FIFO buffer.
+#define SFTX        0x3B        // Flush the TX FIFO buffer.
+#define SWORRST     0x3C        // Reset real time clock.
+#define SNOP        0x3D         // No operation.
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 #define TI_CC_LED_PxOUT         P1OUT
@@ -61,7 +81,7 @@
 //  defined, as well as some common masks for these registers.
 //----------------------------------------------------------------------------
 
-// Configuration Registers
+// RF Controller Registers
 #define TI_CCxxx0_IOCFG2       0x00        // GDO2 output pin configuration
 #define TI_CCxxx0_IOCFG1       0x01        // GDO1 output pin configuration
 #define TI_CCxxx0_IOCFG0       0x02        // GDO0 output pin configuration
@@ -110,22 +130,6 @@
 #define TI_CCxxx0_TEST1        0x2D        // Various test settings
 #define TI_CCxxx0_TEST0        0x2E        // Various test settings
 
-// Strobe commands
-#define TI_CCxxx0_SRES         0x30        // Reset chip.
-#define TI_CCxxx0_SFSTXON      0x31        // Enable/calibrate freq synthesizer
-#define TI_CCxxx0_SXOFF        0x32        // Turn off crystal oscillator.
-#define TI_CCxxx0_SCAL         0x33        // Calibrate freq synthesizer & disable
-#define TI_CCxxx0_SRX          0x34        // Enable RX.
-#define TI_CCxxx0_STX          0x35        // Enable TX.
-#define TI_CCxxx0_SIDLE        0x36        // Exit RX / TX
-#define TI_CCxxx0_SAFC         0x37        // AFC adjustment of freq synthesizer
-#define TI_CCxxx0_SWOR         0x38        // Start automatic RX polling sequence
-#define TI_CCxxx0_SPWD         0x39        // Enter pwr down mode when CSn goes hi
-#define TI_CCxxx0_SFRX         0x3A        // Flush the RX FIFO buffer.
-#define TI_CCxxx0_SFTX         0x3B        // Flush the TX FIFO buffer.
-#define TI_CCxxx0_SWORRST      0x3C        // Reset real time clock.
-#define TI_CCxxx0_SNOP         0x3D        // No operation.
-
 // Status registers
 #define TI_CCxxx0_PARTNUM      0x30        // Part number
 #define TI_CCxxx0_VERSION      0x31        // Current version number
@@ -155,15 +159,12 @@
 #define TI_CCxxx0_READ_SINGLE  0x80
 #define TI_CCxxx0_READ_BURST   0xC0
 
-void TI_CC_PowerupResetCCxxxx(void);
 void TI_CC_SPIWriteReg(char, char);
 void TI_CC_SPIWriteBurstReg(char, char*, char);
 char TI_CC_SPIReadReg(char);
 void TI_CC_SPIReadBurstReg(char, char *, char);
 char TI_CC_SPIReadStatus(char);
 void TI_CC_SPIStrobe(char);
-void TI_CC_Wait(unsigned int);
 
-void writeRFSettings(void);
 void RFSendPacket(char *, char);
 char RFReceivePacket(char *, char *);
