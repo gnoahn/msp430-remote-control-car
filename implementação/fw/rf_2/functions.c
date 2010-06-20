@@ -138,12 +138,12 @@ char ReadRegister(char address)
 {
   char data;
   P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2 & UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = (address | READ_BURST_BIT);      // Send address
-  while (!(IFG2 & UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = 0;                            // Dummy write so we can read data
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  data = UCB0RXBUF;                            // Read data
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = (address | READ_BURST_BIT);
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = 0;
+  while (UCB0STAT & UCBUSY);
+  data = UCB0RXBUF;
   P3OUT = P3OUT | PIN_CS_RF;
   return data;
 }
@@ -151,41 +151,30 @@ char ReadRegister(char address)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//------------------------------------------------------------------------------
-//  void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
-//
-//  DESCRIPTION:
-//  Reads multiple configuration registers, the first register being at address
-//  "addr".  Values read are deposited sequentially starting at address
-//  "buffer", until "count" registers have been read.
-//------------------------------------------------------------------------------
-void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
+void BurstReadRegister(char addr, char *buffer, char count)
 {
-  char i;
+  char aux;
 
   P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = (addr | READ_BURST_BIT);// Send address
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  UCB0TXBUF = 0;                            // Dummy write to read 1st data byte
-  // Addr byte is now being TX'ed, with dummy byte to follow immediately after
-  IFG2 &= ~UCB0RXIFG;                       // Clear flag
-  while (!(IFG2&UCB0RXIFG));                // Wait for end of 1st data byte TX
-  // First data byte now in RXBUF
-  for (i = 0; i < (count-1); i++)
+  while (!(IFG2&UCB0TXIFG));
+  UCB0TXBUF = (addr | READ_BURST_BIT);
+  while (UCB0STAT & UCBUSY);
+  UCB0TXBUF = 0;
+  IFG2 = IFG2 & (~UCB0RXIFG);
+  while (!(IFG2 & UCB0RXIFG));
+
+  for (aux = 0; aux < (count - 1); aux++)
   {
-    UCB0TXBUF = 0;                          //Initiate next data RX, meanwhile..
-    buffer[i] = UCB0RXBUF;                  // Store data from last data RX
-    while (!(IFG2&UCB0RXIFG));              // Wait for RX to finish
+    UCB0TXBUF = 0;
+    buffer[aux] = UCB0RXBUF;
+    while (!(IFG2 & UCB0RXIFG));
   }
-  buffer[count-1] = UCB0RXBUF;              // Store last RX byte in buffer
+  
+  buffer[count - 1] = UCB0RXBUF;
   P3OUT = P3OUT | PIN_CS_RF;
 }
 
 //-----------------------------------------------------------------------------
-//  char RFReceivePacket(char *rxBuffer, char *length)
-//
-//  DESCRIPTION:
 //  Receives a packet of variable length (first byte in the packet must be the
 //  length byte).  The packet length should not exceed the RXFIFO size.  To use
 //  this function, APPEND_STATUS in the PKTCTRL1 register must be enabled.  It
@@ -196,19 +185,6 @@ void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
 //  The RXBYTES register is first read to ensure there are bytes in the FIFO.
 //  This is done because the GDO signal will go high even if the FIFO is flushed
 //  due to address filtering, CRC filtering, or packet length filtering.
-//
-//  ARGUMENTS:
-//      char *rxBuffer
-//          Pointer to the buffer where the incoming data should be stored
-//      char *length
-//          Pointer to a variable containing the size of the buffer where the
-//          incoming data should be stored. After this function returns, that
-//          variable holds the packet length.
-//
-//  RETURN VALUE:
-//      char
-//          0x80:  CRC OK
-//          0x00:  CRC NOT OK (or no pkt was put in the RXFIFO due to filtering)
 //-----------------------------------------------------------------------------
 char RFReceivePacket(char *rxBuffer, char *length)
 {
@@ -221,19 +197,19 @@ char RFReceivePacket(char *rxBuffer, char *length)
 
     if (pktLen <= *length)                  // If pktLen size <= rxBuffer
     {
-      TI_CC_SPIReadBurstReg(RXFIFO, rxBuffer, pktLen); // Pull data
+      BurstReadRegister(RXFIFO, rxBuffer, pktLen); // Pull data
       *length = pktLen;                     // Return the actual size
-      TI_CC_SPIReadBurstReg(RXFIFO, status, 2);
+      BurstReadRegister(RXFIFO, status, 2);
                                             // Read appended status bytes
-      return (char)(status[TI_CCxxx0_LQI_RX]&TI_CCxxx0_CRC_OK);
+      return (char)(status[LQI_RX] & CRC_OK);
     }                                       // Return CRC_OK bit
     else
     {
-      *length = pktLen;                     // Return the large size
-      WriteStrobe(SFRX);      // Flush RXFIFO
-      return 0;                             // Error
+      *length = pktLen;
+      WriteStrobe(SFRX);
+      return 0;
     }
   }
   else
-      return 0;                             // Error
+      return 0;
 }

@@ -10,6 +10,7 @@ void WriteRegister(char, char);
 void WriteStrobe(char);
 void BurstWriteRegister(char, char *, char);
 char ReadRegister(char);
+void BurstReadRegister(char, char *, char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -127,17 +128,11 @@ char ReadRegister(char);
 
 #define WRITE_BURST_BIT  0x40
 #define READ_BURST_BIT   0xC0
+#define READ_SINGLE      0x80
+
+#define LQI_RX           0x01
+#define CRC_OK           0x80
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
-// Masks for appended status bytes
-#define TI_CCxxx0_LQI_RX       0x01        // Position of LQI byte
-#define TI_CCxxx0_CRC_OK       0x80        // Mask "CRC_OK" bit within LQI byte
-
-// Definitions to support burst/single access:
-#define TI_CCxxx0_READ_SINGLE  0x80
-
-void TI_CC_SPIReadBurstReg(char, char *, char);
-char TI_CC_SPIReadStatus(char);
 char RFReceivePacket(char *, char *);

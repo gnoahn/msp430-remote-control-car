@@ -49,8 +49,11 @@ __interrupt void port1_ISR (void)
 #pragma vector = PORT2_VECTOR // Interrupt from GDO0 (packet received)
 __interrupt void port2_ISR(void)
 {
-  char len = 2;
-  if (RFReceivePacket(rxBuffer,&len))     // Fetch packet from CCxxxx
-  P1OUT ^= rxBuffer[1];         // Toggle LEDs according to pkt data
-  P2IFG &= ~PIN_GDO0;      // After pkt RX, this flag is set.
+  if(P2IFG & PIN_GDO0)
+  {
+    char len=2;
+    if (RFReceivePacket(rxBuffer,&len))
+    P1OUT = P1OUT ^ rxBuffer[1];
+  }
+  P2IFG = P2IFG & (~PIN_GDO0);
 }
