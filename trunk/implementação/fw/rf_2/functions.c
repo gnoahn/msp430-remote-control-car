@@ -3,15 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void Delay(unsigned int cycles)
-{
-  while(cycles > 15)
-    cycles = cycles - 6;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
 void SPIInitialization(void)
 {
   P3OUT = P3OUT | PIN_CS_RF;
@@ -37,11 +28,11 @@ void RFInitialization(void)
   P2SEL = 0; // Configure P2.6 (GDO0) and P2.7 (GDO2) as GPIOs
   
   P3OUT = P3OUT | PIN_CS_RF;
-  Delay(30);
+  __delay_cycles(30);
   P3OUT = P3OUT & (~PIN_CS_RF);
-  Delay(30);
+  __delay_cycles(30);
   P3OUT = P3OUT | PIN_CS_RF;
-  Delay(45);
+  __delay_cycles(45);
   P3OUT = P3OUT & (~PIN_CS_RF);
   
   while (!(IFG2&UCB0TXIFG));
@@ -126,15 +117,13 @@ void WriteStrobe(char strobe)
 void BurstWriteRegister(char address, char *buffer, char count)
 {
   unsigned int aux;
-
   P3OUT = P3OUT & (~PIN_CS_RF);
-  
-  while (!(IFG2&UCB0TXIFG));
-  UCB0TXBUF = address | BURST_BIT;
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = address | WRITE_BURST_BIT;
   
   for (aux = 0; aux < count; aux++)
   {
-    while (!(IFG2&UCB0TXIFG));
+    while (!(IFG2 & UCB0TXIFG));
     UCB0TXBUF = buffer[aux];
   }
   
@@ -145,37 +134,22 @@ void BurstWriteRegister(char address, char *buffer, char count)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void RFSend(char *txBuffer, char size)
+char ReadRegister(char address)
 {
-  BurstWriteRegister(TXFIFO, txBuffer, size);
-  WriteStrobe(STX);
-  while (!(P2IN & PIN_GDO0));
-  while (P2IN & PIN_GDO0);
-  P2IFG = P2IFG & (~PIN_GDO0);
-}
-
-//------------------------------------------------------------------------------
-//  char TI_CC_SPIReadReg(char addr)
-//
-//  DESCRIPTION:
-//  Reads a single configuration register at address "addr" and returns the
-//  value read.
-//------------------------------------------------------------------------------
-char TI_CC_SPIReadReg(char addr)
-{
-  char x;
-
+  char data;
   P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = (addr | TI_CCxxx0_READ_SINGLE);// Send address
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
+  while (!(IFG2 & UCB0TXIFG));                // Wait for TXBUF ready
+  UCB0TXBUF = (address | READ_BURST_BIT);      // Send address
+  while (!(IFG2 & UCB0TXIFG));                // Wait for TXBUF ready
   UCB0TXBUF = 0;                            // Dummy write so we can read data
   while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  x = UCB0RXBUF;                            // Read data
+  data = UCB0RXBUF;                            // Read data
   P3OUT = P3OUT | PIN_CS_RF;
-
-  return x;
+  return data;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 //------------------------------------------------------------------------------
 //  void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
@@ -191,7 +165,7 @@ void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
 
   P3OUT = P3OUT & (~PIN_CS_RF);
   while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = (addr | TI_CCxxx0_READ_BURST);// Send address
+  UCB0TXBUF = (addr | READ_BURST_BIT);// Send address
   while (UCB0STAT & UCBUSY);                // Wait for TX to complete
   UCB0TXBUF = 0;                            // Dummy write to read 1st data byte
   // Addr byte is now being TX'ed, with dummy byte to follow immediately after
@@ -206,29 +180,6 @@ void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
   }
   buffer[count-1] = UCB0RXBUF;              // Store last RX byte in buffer
   P3OUT = P3OUT | PIN_CS_RF;
-}
-
-//------------------------------------------------------------------------------
-//  char TI_CC_SPIReadStatus(char addr)
-//
-//  DESCRIPTION:
-//  Special read function for reading status registers.  Reads status register
-//  at register "addr" and returns the value read.
-//------------------------------------------------------------------------------
-char TI_CC_SPIReadStatus(char addr)
-{
-  char status;
-
-  P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = (addr | TI_CCxxx0_READ_BURST);// Send address
-  while (!(IFG2&UCB0TXIFG));                // Wait for TXBUF ready
-  UCB0TXBUF = 0;                            // Dummy write so we can read data
-  while (UCB0STAT & UCBUSY);                // Wait for TX to complete
-  status = UCB0RXBUF;                       // Read data
-  P3OUT = P3OUT | PIN_CS_RF;
-
-  return status;
 }
 
 //-----------------------------------------------------------------------------
@@ -264,9 +215,9 @@ char RFReceivePacket(char *rxBuffer, char *length)
   char status[2];
   char pktLen;
 
-  if ((TI_CC_SPIReadStatus(RXBYTES) & NUM_RXBYTES))
+  if ((ReadRegister(RXBYTES) & NUM_RXBYTES))
   {
-    pktLen = TI_CC_SPIReadReg(RXFIFO); // Read length byte
+    pktLen = ReadRegister(RXFIFO); // Read length byte
 
     if (pktLen <= *length)                  // If pktLen size <= rxBuffer
     {

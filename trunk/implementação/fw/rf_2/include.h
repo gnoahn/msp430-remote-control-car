@@ -3,14 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void Delay(unsigned int);
 void SPIInitialization(void);
 void RFInitialization(void);
 void RFConfiguration(void);
 void WriteRegister(char, char);
 void WriteStrobe(char);
 void BurstWriteRegister(char, char *, char);
-void RFSend(char *, char);
+char ReadRegister(char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +125,8 @@ void RFSend(char *, char);
 
 // Auxiliary Definitions
 
-#define BURST_BIT  0x40
+#define WRITE_BURST_BIT  0x40
+#define READ_BURST_BIT   0xC0
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,9 +137,7 @@ void RFSend(char *, char);
 
 // Definitions to support burst/single access:
 #define TI_CCxxx0_READ_SINGLE  0x80
-#define TI_CCxxx0_READ_BURST   0xC0
 
-char TI_CC_SPIReadReg(char);
 void TI_CC_SPIReadBurstReg(char, char *, char);
 char TI_CC_SPIReadStatus(char);
 char RFReceivePacket(char *, char *);
