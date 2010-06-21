@@ -18,7 +18,12 @@ LED vermelho em qualquer situação indica repouso do carro.
 Este código é semelhante ao acelerômetro_1. Nesse caso, a comunicação SPI é realizada a 3 fios e as funções de
 leitura e escrita foram modificadas.
 
-3. rf_1
+4. acelerômetro_4
+
+Este código é semelhante ao acelerômetro_2. Nesse caso, a comunicação SPI é realizada a 3 fios e as funções de
+leitura e escrita foram modificadas.
+
+5. rf_1
 
 Este código faz parte de um código ainda mais complexo desenvolvido pela Texas Instruments. O código original,
 que não encontra-se no repositório, foi escrito para atender ao uso de diferentes plataformas do fabricante.
@@ -26,7 +31,7 @@ Por isso, houve a necessidade de editar o código para diminuir o número de arqui
 3 arquivos. Após a edição, esse código consta de 1 arquivo .h contendo declarações, 1 arquivo .c contendo
 funções, e 1 arquivo .c contendo a função principal e a rotina de interrupção.
 
-4. rf_2
+6. rf_2
 
 Este código é uma alteração do rf_1. As alterações foram realizadas de modo a deixar o código mais legível.
 Foram adotados os mesmos padrões de escrita dos códigos de validação do acelerômetro. O algoritmo do código
