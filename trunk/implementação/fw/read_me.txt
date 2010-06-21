@@ -13,6 +13,11 @@ Quando aceso, o LED vermelho indica que o carro se desloca para frente. O acendi
 mesmo tempo que o vermelho indica uma trajetória circular no sentido horário ou anti-horário. O apagamento do
 LED vermelho em qualquer situação indica repouso do carro.
 
+3. acelerômetro_3
+
+Este código é semelhante ao acelerômetro_1. Nesse caso, a comunicação SPI é realizada a 3 fios e as funções de
+leitura e escrita foram modificadas.
+
 3. rf_1
 
 Este código faz parte de um código ainda mais complexo desenvolvido pela Texas Instruments. O código original,
