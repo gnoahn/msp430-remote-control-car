@@ -36,3 +36,10 @@ funções, e 1 arquivo .c contendo a função principal e a rotina de interrupção.
 Este código é uma alteração do rf_1. As alterações foram realizadas de modo a deixar o código mais legível.
 Foram adotados os mesmos padrões de escrita dos códigos de validação do acelerômetro. O algoritmo do código
 desenvolvido pela Texas Instruments foi mantido.
+
+7. integração_1
+
+Este código foi adaptado de modo a manter em funcionamento simultâneo o acelerômetro e o RF. Desse modo, os
+leds LED1 e LED2 acendem se a comunicação MSP430 - ACELERÔMETRO e MSP430 - RF forem estabelecidas,
+respectivamente. Após o acendimento desses leds é enviado um pacote por RF cuja função é acender um LED verde
+em outra placa onde deve estar gravado o código rf_2.
