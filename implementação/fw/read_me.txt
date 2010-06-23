@@ -40,6 +40,6 @@ desenvolvido pela Texas Instruments foi mantido.
 7. integração_1
 
 Este código foi adaptado de modo a manter em funcionamento simultâneo o acelerômetro e o RF. Desse modo, os
-leds LED1 e LED2 acendem se a comunicação MSP430 - ACELERÔMETRO e MSP430 - RF forem estabelecidas,
-respectivamente. Após o acendimento desses leds é enviado um pacote por RF cuja função é acender um LED verde
-em outra placa onde deve estar gravado o código rf_2.
+leds LED1 e LED2 acendem se as comunicações MSP430 - ACELERÔMETRO e MSP430 - RF forem estabelecidas,
+respectivamente. Após o acendimento desses leds é enviado um pacote de 3 bytes por RF cuja função é acender
+um LED verde em outra placa onde deve estar gravado o código rf_2.
