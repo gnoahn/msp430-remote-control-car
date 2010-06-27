@@ -169,30 +169,20 @@ void BurstReadRegister(char addr, char *buffer, char count)
 //  This is done because the GDO signal will go high even if the FIFO is flushed
 //  due to address filtering, CRC filtering, or packet length filtering.
 //-----------------------------------------------------------------------------
-char RFReceivePacket(char *rxBuffer, char *length)
+char RFReceivePacket(char *rxBuffer, char length)
 {
   char status[2];
   char pktLen;
 
-  if ((ReadRegister(RXBYTES) & NUM_RXBYTES))
+  if (ReadRegister(RXBYTES) & NUM_RXBYTES)
   {
-    pktLen = ReadRegister(RXFIFO); // Read length byte
+    pktLen = ReadRegister(RXFIFO);
 
-    if (pktLen <= *length)                  // If pktLen size <= rxBuffer
+    if (pktLen <= length)
     {
-      BurstReadRegister(RXFIFO, rxBuffer, pktLen); // Pull data
-      *length = pktLen;                     // Return the actual size
+      BurstReadRegister(RXFIFO, rxBuffer, pktLen);
       BurstReadRegister(RXFIFO, status, 2);
-                                            // Read appended status bytes
-      return (char)(status[LQI_RX] & CRC_OK);
-    }                                       // Return CRC_OK bit
-    else
-    {
-      *length = pktLen;
-      WriteStrobe(SFRX);
-      return 0;
+      return (char)(status[1] & 0x80);
     }
   }
-  else
-      return 0;
 }
