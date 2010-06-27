@@ -8,7 +8,6 @@ void RFInitialization(void);
 void RFConfiguration(void);
 void WriteRegister(char, char);
 void WriteStrobe(char);
-void BurstWriteRegister(char, char *, char);
 char ReadRegister(char);
 void BurstReadRegister(char, char *, char);
 

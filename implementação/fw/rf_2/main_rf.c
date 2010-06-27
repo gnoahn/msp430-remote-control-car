@@ -34,15 +34,24 @@ void main (void)
 #pragma vector = PORT1_VECTOR // Interrupt from a pressed button
 __interrupt void port1_ISR (void)
 {
+  unsigned int aux;
   txBuffer[0] = 2;
   txBuffer[1] = 0x01;
-  txBuffer[2] = (~P1IFG << 1) & 0x02;
+  txBuffer[2] = (~P1IFG << 1) & 0x02; // ???????????
   
-  BurstWriteRegister(TXFIFO, txBuffer, 3);
+  P3OUT = P3OUT & (~PIN_CS_RF);
+  while (!(IFG2 & UCB0TXIFG));
+  UCB0TXBUF = TXFIFO | WRITE_BURST_BIT;
+  for (aux = 0; aux < 3; aux++)
+  {
+    while (!(IFG2 & UCB0TXIFG));
+    UCB0TXBUF = txBuffer[aux];
+  }
+  while (UCB0STAT & UCBUSY);
+  P3OUT = P3OUT | PIN_CS_RF;
+  
   WriteStrobe(STX);
-  
   __delay_cycles(5000);
-  
   P1IFG = P1IFG & (~PIN_SWITCH);
 }
 
