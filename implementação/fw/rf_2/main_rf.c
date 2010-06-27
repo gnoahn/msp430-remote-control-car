@@ -58,8 +58,7 @@ __interrupt void port1_ISR (void)
 #pragma vector = PORT2_VECTOR // Interrupt from GDO0 (packet received)
 __interrupt void port2_ISR(void)
 {
-  char len = 2;
-  if (RFReceivePacket(rxBuffer,&len))
+  if (RFReceivePacket(rxBuffer,2))
   {
     P1OUT = P1OUT ^ rxBuffer[1];
   }

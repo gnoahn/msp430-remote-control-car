@@ -129,9 +129,6 @@ void BurstReadRegister(char, char *, char);
 #define READ_BURST_BIT   0xC0
 #define READ_SINGLE      0x80
 
-#define LQI_RX           0x01
-#define CRC_OK           0x80
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-char RFReceivePacket(char *, char *);
+char RFReceivePacket(char *, char);

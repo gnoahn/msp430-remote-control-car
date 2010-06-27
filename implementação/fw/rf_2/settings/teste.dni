@@ -1,14 +1,14 @@
 [State Storage]
-Control Register=33916
+Control Register=33870
 [Sequencer]
-Control Register=33916
-NextState0=33916
-NextState1=33916
+Control Register=33870
+NextState0=33870
+NextState1=33870
 [Action Register]
 Break=1
 State Storage=1
 [DebugChecksum]
-Checksum=-2014634998
+Checksum=-1052933232
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 1
@@ -28,13 +28,6 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Breakpoints]
 Count=0
 [FET]
@@ -57,3 +50,10 @@ SP=0
 SR=0
 all registers=0
 File name=
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
