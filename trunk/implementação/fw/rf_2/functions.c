@@ -169,4 +169,8 @@ char RFReceivePacket(char *rxBuffer, char length)
     BurstReadRegister(RXFIFO, status, 2);
     return 1;
   }
+  else
+  {
+    return 0;
+  }
 }

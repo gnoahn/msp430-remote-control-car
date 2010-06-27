@@ -37,7 +37,7 @@ __interrupt void port1_ISR (void)
   unsigned int aux;
   txBuffer[0] = 2;
   txBuffer[1] = 0x01;
-  txBuffer[2] = 0x02;
+  txBuffer[2] = 0x01; // Remotely lights the RED LED (P1.0 = 00000001)
   
   P3OUT = P3OUT & (~PIN_CS_RF);
   while (!(IFG2 & UCB0TXIFG));
@@ -62,5 +62,6 @@ __interrupt void port2_ISR(void)
   {
     P1OUT = P1OUT ^ rxBuffer[1];
   }
+  
   P2IFG = P2IFG & (~PIN_GDO0);
 }
