@@ -114,26 +114,6 @@ void WriteStrobe(char strobe)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void BurstWriteRegister(char address, char *buffer, char count)
-{
-  unsigned int aux;
-  P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2 & UCB0TXIFG));
-  UCB0TXBUF = address | WRITE_BURST_BIT;
-  
-  for (aux = 0; aux < count; aux++)
-  {
-    while (!(IFG2 & UCB0TXIFG));
-    UCB0TXBUF = buffer[aux];
-  }
-  
-  while (UCB0STAT & UCBUSY);
-  P3OUT = P3OUT | PIN_CS_RF;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
 char ReadRegister(char address)
 {
   char data;
@@ -173,6 +153,9 @@ void BurstReadRegister(char addr, char *buffer, char count)
   buffer[count - 1] = UCB0RXBUF;
   P3OUT = P3OUT | PIN_CS_RF;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------------------
 //  Receives a packet of variable length (first byte in the packet must be the
