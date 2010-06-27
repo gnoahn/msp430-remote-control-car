@@ -37,7 +37,7 @@ __interrupt void port1_ISR (void)
   unsigned int aux;
   txBuffer[0] = 2;
   txBuffer[1] = 0x01;
-  txBuffer[2] = (~P1IFG << 1) & 0x02; // ???????????
+  txBuffer[2] = 0x02;
   
   P3OUT = P3OUT & (~PIN_CS_RF);
   while (!(IFG2 & UCB0TXIFG));

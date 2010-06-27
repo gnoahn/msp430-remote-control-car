@@ -157,18 +157,6 @@ void BurstReadRegister(char addr, char *buffer, char count)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//-----------------------------------------------------------------------------
-//  Receives a packet of variable length (first byte in the packet must be the
-//  length byte).  The packet length should not exceed the RXFIFO size.  To use
-//  this function, APPEND_STATUS in the PKTCTRL1 register must be enabled.  It
-//  is assumed that the function is called after it is known that a packet has
-//  been received; for example, in response to GDO0 going low when it is
-//  configured to output packet reception status.
-//
-//  The RXBYTES register is first read to ensure there are bytes in the FIFO.
-//  This is done because the GDO signal will go high even if the FIFO is flushed
-//  due to address filtering, CRC filtering, or packet length filtering.
-//-----------------------------------------------------------------------------
 char RFReceivePacket(char *rxBuffer, char length)
 {
   char status[2];
@@ -177,12 +165,8 @@ char RFReceivePacket(char *rxBuffer, char length)
   if (ReadRegister(RXBYTES) & NUM_RXBYTES)
   {
     pktLen = ReadRegister(RXFIFO);
-
-    if (pktLen <= length)
-    {
-      BurstReadRegister(RXFIFO, rxBuffer, pktLen);
-      BurstReadRegister(RXFIFO, status, 2);
-      return (char)(status[1] & 0x80);
-    }
+    BurstReadRegister(RXFIFO, rxBuffer, pktLen);
+    BurstReadRegister(RXFIFO, status, 2);
+    return 1;
   }
 }

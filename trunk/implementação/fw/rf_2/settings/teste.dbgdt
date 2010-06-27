@@ -26,12 +26,12 @@
         
         
       <MixedMode>1</MixedMode><CodeCovShow>0</CodeCovShow><InstrProfShow>0</InstrProfShow></Disassembly>
-    </Static>
+    <Watch><Format><struct_types/><watch_formats/></Format></Watch><Locals><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3></Locals><Statics><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3></Statics></Static>
     <Windows>
       
       
       
-    <Wnd0>
+    <Wnd3>
         <Tabs>
           <Tab>
             <Identity>TabID-15735-19632</Identity>
@@ -43,7 +43,7 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd0><Wnd1>
+      <SelectedTab>0</SelectedTab></Wnd3><Wnd4>
         <Tabs>
           <Tab>
             <Identity>TabID-26483-19635</Identity>
@@ -53,20 +53,20 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd1><Wnd2><Tabs><Tab><Identity>TabID-26129-29527</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd2></Windows>
+      <SelectedTab>0</SelectedTab></Wnd4><Wnd5><Tabs><Tab><Identity>TabID-28485-4379</Identity><TabName>Locals</TabName><Factory>Locals</Factory><Session><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab><Tab><Identity>TabID-16691-4395</Identity><TabName>Statics</TabName><Factory>Statics</Factory><Session><SelectedVars/><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3><ShowAllVars>1</ShowAllVars></Session></Tab></Tabs><SelectedTab>1</SelectedTab></Wnd5><Wnd0><Tabs><Tab><Identity>TabID-22296-11864</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd0></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\functions.c</Filename><XPos>0</XPos><YPos>142</YPos><SelStart>5313</SelStart><SelEnd>5313</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\main_rf.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>80</SelStart><SelEnd>80</SelEnd></Tab><ActiveTab>1</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\include.h</Filename><XPos>0</XPos><YPos>15</YPos><SelStart>1816</SelStart><SelEnd>1816</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\functions.c</Filename><XPos>0</XPos><YPos>151</YPos><SelStart>5821</SelStart><SelEnd>5821</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\main_rf.c</Filename><XPos>0</XPos><YPos>27</YPos><SelStart>80</SelStart><SelEnd>80</SelEnd></Tab><ActiveTab>1</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>C:\Users\User\Documents\UFC\2010.1\Técnicas Avançadas em Microprocessadores\msp430-remote-control-car\implementação\fw\rf_2\include.h</Filename><XPos>0</XPos><YPos>113</YPos><SelStart>6153</SelStart><SelEnd>6153</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-0195e888><key>iaridepm.enu1</key></Toolbar-0195e888></Sizes></Row0><Row1><Sizes><Toolbar-03872238><key>debuggergui.enu1</key></Toolbar-03872238></Sizes></Row1><Row2><Sizes><Toolbar-038722f8><key>430fet1</key></Toolbar-038722f8></Sizes></Row2><Row3><Sizes/></Row3><Row4><Sizes/></Row4><Row5><Sizes/></Row5><Row6><Sizes/></Row6><Row7><Sizes/></Row7><Row8><Sizes/></Row8><Row9><Sizes/></Row9><Row10><Sizes/></Row10><Row11><Sizes/></Row11><Row12><Sizes/></Row12><Row13><Sizes/></Row13><Row14><Sizes/></Row14><Row15><Sizes/></Row15><Row16><Sizes/></Row16><Row17><Sizes/></Row17><Row18><Sizes/></Row18><Row19><Sizes/></Row19></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>439</Bottom><Right>201</Right><x>-2</x><y>-2</y><xscreen>203</xscreen><yscreen>205</yscreen><sizeHorzCX>158594</sizeHorzCX><sizeHorzCY>280822</sizeHorzCY><sizeVertCX>158594</sizeVertCX><sizeVertCY>604110</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>439</Bottom><Right>201</Right><x>-2</x><y>-2</y><xscreen>203</xscreen><yscreen>205</yscreen><sizeHorzCX>158594</sizeHorzCX><sizeHorzCY>280822</sizeHorzCY><sizeVertCX>158594</sizeVertCX><sizeVertCY>604110</sizeVertCY></Rect></Wnd1></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>200</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>273973</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>273973</sizeVertCY></Rect></Wnd2></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-0197e888><key>iaridepm.enu1</key></Toolbar-0197e888></Sizes></Row0><Row1><Sizes><Toolbar-019cb0f8><key>debuggergui.enu1</key></Toolbar-019cb0f8></Sizes></Row1><Row2><Sizes><Toolbar-019cb1b8><key>430fet1</key></Toolbar-019cb1b8></Sizes></Row2><Row3><Sizes/></Row3><Row4><Sizes/></Row4><Row5><Sizes/></Row5><Row6><Sizes/></Row6><Row7><Sizes/></Row7><Row8><Sizes/></Row8><Row9><Sizes/></Row9><Row10><Sizes/></Row10><Row11><Sizes/></Row11><Row12><Sizes/></Row12><Row13><Sizes/></Row13><Row14><Sizes/></Row14><Row15><Sizes/></Row15><Row16><Sizes/></Row16><Row17><Sizes/></Row17><Row18><Sizes/></Row18><Row19><Sizes/></Row19></Top><Left><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>439</Bottom><Right>201</Right><x>-2</x><y>-2</y><xscreen>203</xscreen><yscreen>205</yscreen><sizeHorzCX>158594</sizeHorzCX><sizeHorzCY>280822</sizeHorzCY><sizeVertCX>158594</sizeVertCX><sizeVertCY>604110</sizeVertCY></Rect></Wnd3></Sizes></Row0></Left><Right><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>439</Bottom><Right>201</Right><x>-2</x><y>-2</y><xscreen>203</xscreen><yscreen>205</yscreen><sizeHorzCX>158594</sizeHorzCX><sizeHorzCY>280822</sizeHorzCY><sizeVertCX>158594</sizeVertCX><sizeVertCY>604110</sizeVertCY></Rect></Wnd4></Sizes></Row0><Row1><Sizes><Wnd5><Rect><Top>-2</Top><Left>199</Left><Bottom>439</Bottom><Right>399</Right><x>199</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>156250</sizeHorzCX><sizeHorzCY>273973</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>604110</sizeVertCY></Rect></Wnd5></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>200</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>273973</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>273973</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Project>
 
