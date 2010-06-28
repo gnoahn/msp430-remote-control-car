@@ -34,17 +34,21 @@ __interrupt void port2_ISR(void)
   {
     switch (rxBuffer[1])
     {
-    case 0x11: P2OUT = P2OUT | LED1; // Turn on LED1 - 0x11
+    case 0x11: P2OUT = P2OUT | LED1; // Turn on LED1
                break;
-    case 0x12: P2OUT = P2OUT | LED2; // Turn on LED2 - 0x12
+    case 0x12: P2OUT = P2OUT | LED2; // Turn on LED2
                break;
-    case 0x13: P2OUT = P2OUT | LED3; // Turn on LED3 - 0x13
+    case 0x13: P2OUT = P2OUT | LED3; // Turn on LED3
                break;
-    case 0x01: P2OUT = P2OUT & (~LED1); // Turn off LED1 - 0x01
+    case 0x01: P2OUT = P2OUT & (~LED1); // Turn off LED1
                break;
-    case 0x02: P2OUT = P2OUT & (~LED2); // Turn off LED2 - 0x02
+    case 0x02: P2OUT = P2OUT & (~LED2); // Turn off LED2
                break;
-    case 0x03: P2OUT = P2OUT & (~LED3); // Turn off LED3 - 0x03
+    case 0x03: P2OUT = P2OUT & (~LED3); // Turn off LED3
+               break;
+    case 0x04: P2OUT = P2OUT & (~LED1) & (~LED3); // Turn off LED1 and LED3
+               break;
+    case 0x05: P2OUT = P2OUT & (~LED1) & (~LED2) & (~LED3); // Turn off LED1 and LED3
                break;
     }
   }
