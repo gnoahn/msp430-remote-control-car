@@ -7,16 +7,16 @@
     <name>Debug</name>
     <outputs>
       <file>$PROJ_DIR$\main_rf.c</file>
-      <file>$PROJ_DIR$\include.h</file>
-      <file>$TOOLKIT_DIR$\config\lnk430F2274.xcl</file>
-      <file>$PROJ_DIR$\Debug\Obj\main_rf.r43</file>
-      <file>$PROJ_DIR$\Debug\Obj\functions.r43</file>
-      <file>$PROJ_DIR$\functions.c</file>
-      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\teste.pbd</file>
-      <file>$PROJ_DIR$\Debug\Exe\teste.d43</file>
       <file>$PROJ_DIR$\Debug\Obj\main_rf.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\functions.pbi</file>
+      <file>$TOOLKIT_DIR$\config\lnk430F2274.xcl</file>
+      <file>$PROJ_DIR$\include.h</file>
+      <file>$PROJ_DIR$\functions.c</file>
+      <file>$PROJ_DIR$\Debug\Exe\teste.d43</file>
+      <file>$PROJ_DIR$\Debug\Obj\teste.pbd</file>
+      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\functions.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\main_rf.r43</file>
       <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
       <file>$TOOLKIT_DIR$\inc\in430.h</file>
       <file>$TOOLKIT_DIR$\inc\MSP430F2274.h</file>
@@ -27,21 +27,21 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 9</file>
+          <file> 1</file>
         </tool>
         <tool>
           <name>ICC430</name>
-          <file> 3</file>
+          <file> 10</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 1 6</file>
+          <file> 4 8</file>
         </tool>
         <tool>
           <name>ICC430</name>
-          <file> 1 6 13 12 11</file>
+          <file> 4 8 13 12 11</file>
         </tool>
       </inputs>
     </file>
@@ -50,30 +50,21 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 10</file>
+          <file> 2</file>
         </tool>
         <tool>
           <name>ICC430</name>
-          <file> 4</file>
+          <file> 9</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 1 6</file>
+          <file> 4 8</file>
         </tool>
         <tool>
           <name>ICC430</name>
-          <file> 1 6 13 12 11</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Debug\Obj\teste.pbd</name>
-      <inputs>
-        <tool>
-          <name>BILINK</name>
-          <file> 10 9</file>
+          <file> 4 8 13 12 11</file>
         </tool>
       </inputs>
     </file>
@@ -82,7 +73,16 @@
       <inputs>
         <tool>
           <name>XLINK</name>
-          <file> 2 4 3 14</file>
+          <file> 3 9 10 14</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\teste.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 2 1</file>
         </tool>
       </inputs>
     </file>
@@ -91,7 +91,7 @@
       <outputs>
         <tool>
           <name>XLINK</name>
-          <file> 8</file>
+          <file> 6</file>
         </tool>
       </outputs>
     </file>
