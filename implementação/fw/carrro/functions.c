@@ -114,26 +114,6 @@ void WriteStrobe(char strobe)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-void BurstWriteRegister(char address, char *buffer, char count)
-{
-  unsigned int aux;
-  P3OUT = P3OUT & (~PIN_CS_RF);
-  while (!(IFG2 & UCB0TXIFG));
-  UCB0TXBUF = address | WRITE_BURST_BIT;
-  
-  for (aux = 0; aux < count; aux++)
-  {
-    while (!(IFG2 & UCB0TXIFG));
-    UCB0TXBUF = buffer[aux];
-  }
-  
-  while (UCB0STAT & UCBUSY);
-  P3OUT = P3OUT | PIN_CS_RF;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
 char ReadRegister(char address)
 {
   char data;
@@ -174,42 +154,23 @@ void BurstReadRegister(char addr, char *buffer, char count)
   P3OUT = P3OUT | PIN_CS_RF;
 }
 
-//-----------------------------------------------------------------------------
-//  Receives a packet of variable length (first byte in the packet must be the
-//  length byte).  The packet length should not exceed the RXFIFO size.  To use
-//  this function, APPEND_STATUS in the PKTCTRL1 register must be enabled.  It
-//  is assumed that the function is called after it is known that a packet has
-//  been received; for example, in response to GDO0 going low when it is
-//  configured to output packet reception status.
-//
-//  The RXBYTES register is first read to ensure there are bytes in the FIFO.
-//  This is done because the GDO signal will go high even if the FIFO is flushed
-//  due to address filtering, CRC filtering, or packet length filtering.
-//-----------------------------------------------------------------------------
-char RFReceivePacket(char *rxBuffer, char *length)
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+char RFReceivePacket(char *rxBuffer, char length)
 {
   char status[2];
   char pktLen;
 
-  if ((ReadRegister(RXBYTES) & NUM_RXBYTES))
+  if (ReadRegister(RXBYTES) & NUM_RXBYTES)
   {
-    pktLen = ReadRegister(RXFIFO); // Read length byte
-
-    if (pktLen <= *length)                  // If pktLen size <= rxBuffer
-    {
-      BurstReadRegister(RXFIFO, rxBuffer, pktLen); // Pull data
-      *length = pktLen;                     // Return the actual size
-      BurstReadRegister(RXFIFO, status, 2);
-                                            // Read appended status bytes
-      return (char)(status[LQI_RX] & CRC_OK);
-    }                                       // Return CRC_OK bit
-    else
-    {
-      *length = pktLen;
-      WriteStrobe(SFRX);
-      return 0;
-    }
+    pktLen = ReadRegister(RXFIFO);
+    BurstReadRegister(RXFIFO, rxBuffer, pktLen);
+    BurstReadRegister(RXFIFO, status, 2);
+    return 1;
   }
   else
-      return 0;
+  {
+    return 0;
+  }
 }
