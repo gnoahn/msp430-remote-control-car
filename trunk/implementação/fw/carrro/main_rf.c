@@ -1,6 +1,5 @@
 #include "include.h"
 
-char txBuffer[4];
 char rxBuffer[4];
 
 void main (void)
@@ -11,15 +10,12 @@ void main (void)
   RFInitialization();
   RFConfiguration();
 
-  // Configure Switch
-  P1REN = PIN_SWITCH;
-  P1IES = PIN_SWITCH;
-  P1IFG = P1IFG & (~PIN_SWITCH);
-  P1IE  = PIN_SWITCH;
-  
   // Configure LEDs
-  P1OUT = P1OUT & (~PIN_LED1) & (~PIN_LED2);
-  P1DIR = P1DIR | PIN_LED1 | PIN_LED2;
+//  P1OUT = P1OUT & (~PIN_LED1) & (~PIN_LED2);
+//  P1DIR = P1DIR | PIN_LED1 | PIN_LED2;
+  
+  P2OUT = P2OUT & (~LED1) & (~LED2) & (~LED3);
+  P2DIR = P2DIR | LED1 | LED2 | LED3;
 
   // Configure GDO0 to RX packet info from CC2500
   P2IES = P2IES | PIN_GDO0;
@@ -31,28 +27,26 @@ void main (void)
   __bis_SR_register(LPM3_bits + GIE);
 }
 
-#pragma vector = PORT1_VECTOR // Interrupt from a pressed button
-__interrupt void port1_ISR (void)
-{
-  txBuffer[0] = 2;
-  txBuffer[1] = 0x01;
-  txBuffer[2] = (~P1IFG << 1) & 0x02;
-  
-  BurstWriteRegister(TXFIFO, txBuffer, 3);
-  WriteStrobe(STX);
-  
-  __delay_cycles(5000);
-  
-  P1IFG = P1IFG & (~PIN_SWITCH);
-}
-
 #pragma vector = PORT2_VECTOR // Interrupt from GDO0 (packet received)
 __interrupt void port2_ISR(void)
 {
-  char len = 2;
-  if (RFReceivePacket(rxBuffer,&len))
+  if (RFReceivePacket(rxBuffer, 2))
   {
-    P1OUT = P1OUT ^ rxBuffer[1];
+    switch (rxBuffer[1])
+    {
+    case 0x11: P2OUT = P2OUT | LED1; // Turn on LED1 - 0x11
+               break;
+    case 0x12: P2OUT = P2OUT | LED2; // Turn on LED2 - 0x12
+               break;
+    case 0x13: P2OUT = P2OUT | LED3; // Turn on LED3 - 0x13
+               break;
+    case 0x01: P2OUT = P2OUT & (~LED1); // Turn off LED1 - 0x01
+               break;
+    case 0x02: P2OUT = P2OUT & (~LED2); // Turn off LED2 - 0x02
+               break;
+    case 0x03: P2OUT = P2OUT & (~LED3); // Turn off LED3 - 0x03
+               break;
+    }
   }
   P2IFG = P2IFG & (~PIN_GDO0);
 }

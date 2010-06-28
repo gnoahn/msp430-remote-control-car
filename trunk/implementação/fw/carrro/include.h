@@ -8,9 +8,9 @@ void RFInitialization(void);
 void RFConfiguration(void);
 void WriteRegister(char, char);
 void WriteStrobe(char);
-void BurstWriteRegister(char, char *, char);
 char ReadRegister(char);
 void BurstReadRegister(char, char *, char);
+char RFReceivePacket(char *, char);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,10 +22,12 @@ void BurstReadRegister(char, char *, char);
 #define PIN_SCK     BIT3
 #define PIN_CS_RF   BIT0
 
-#define PIN_LED1    BIT0
-#define PIN_LED2    BIT1
+//#define PIN_LED1    BIT0
+//#define PIN_LED2    BIT1
 
-#define PIN_SWITCH  BIT2
+#define LED1        BIT4
+#define LED2        BIT2
+#define LED3        BIT3
 
 #define PIN_GDO0    BIT6
 
@@ -129,10 +131,3 @@ void BurstReadRegister(char, char *, char);
 #define WRITE_BURST_BIT  0x40
 #define READ_BURST_BIT   0xC0
 #define READ_SINGLE      0x80
-
-#define LQI_RX           0x01
-#define CRC_OK           0x80
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-char RFReceivePacket(char *, char *);
